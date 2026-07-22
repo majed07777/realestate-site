@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* النصوص */
   document.getElementById('p-name').textContent = property.name;
   document.getElementById('p-type-place').textContent =
-    property.type + ' في حي ' + property.district + '، الرياض';
+    property.type + ' في حي ' + property.district + '، جدة';
   document.getElementById('p-price').innerHTML = fmtPrice(property.price);
   document.getElementById('p-desc').textContent = property.desc;
 
