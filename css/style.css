@@ -536,6 +536,61 @@ body:not(.home) .site-header {
 }
 .stat span { color: var(--text-mute); font-size: 1rem; }
 
+/* small gold chevron mark (from the brand's peaks motif) */
+.chev::before {
+  content: "";
+  display: inline-block;
+  width: 17px;
+  height: 11px;
+  margin-inline-end: .55rem;
+  vertical-align: 1px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 12'%3E%3Cpath d='M2 10 L9 3 L16 10' fill='none' stroke='%23E6A03A' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* ── About: من نحن + الرؤية + الرسالة ─────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+.about-grid h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.55; }
+.about-grid h2 .gold { color: var(--gold-ink); }
+.about-lead { margin-top: 1.3rem; color: var(--text-soft); font-size: 1.08rem; max-width: 34rem; }
+.vm { display: grid; gap: 1.9rem; padding-top: .4rem; }
+.vm-item h3 { font-size: 1.2rem; color: var(--teal-800); margin-bottom: .5rem; }
+.vm-item p { color: var(--text-mute); }
+
+/* ── Portfolio: مشاريعنا الحالية والسابقة ─────────────── */
+.portfolio-band { background: var(--bg-band); }
+.proj-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.proj-col h3 { font-size: 1.15rem; color: var(--teal-800); margin-bottom: 1rem; }
+.proj-list { list-style: none; margin: 0; padding: 0; }
+.proj-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .9rem 0;
+  border-top: 1px solid var(--card-border);
+}
+.proj-list li:last-child { border-bottom: 1px solid var(--card-border); }
+.proj-list .pn { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--heading); }
+.proj-list .pd { color: var(--text-mute); font-size: .95rem; }
+
+/* ── Values: قيمنا ────────────────────────────────────── */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.6rem, 4vw, 2.6rem);
+}
+.value h3 { font-size: 1.2rem; color: var(--heading); margin-bottom: .45rem; }
+.value p { color: var(--text-mute); font-size: .95rem; }
+
 /* ── Closing contact call (cream — the one warm moment) ─ */
 .call-band {
   position: relative;
@@ -1024,8 +1079,10 @@ body:not(.home) .site-header {
 @media (max-width: 960px) {
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .why-grid { grid-template-columns: 1fr; }
-  .stats { grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+  .stats { grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1.2rem; }
   .stat { flex-direction: column; gap: .2rem; }
   .property-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -1045,6 +1102,8 @@ body:not(.home) .site-header {
 
   .cards-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+  .values-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+  .proj-columns { grid-template-columns: 1fr; gap: 2.2rem; }
   .stats { grid-template-columns: 1fr; gap: 1.6rem; }
   .stat { flex-direction: row; align-items: baseline; }
 
