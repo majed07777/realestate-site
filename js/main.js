@@ -35,7 +35,7 @@ function propertyCard(p) {
       '</a>' +
       '<div class="card-body">' +
         '<h3><a href="property.html?id=' + p.id + '">' + p.name + '</a></h3>' +
-        '<p class="card-place">' + ICONS.pin + 'حي ' + p.district + '، الرياض</p>' +
+        '<p class="card-place">' + ICONS.pin + 'حي ' + p.district + '، جدة</p>' +
         '<div class="card-specs">' +
           '<span>' + ICONS.area + '<bdi class="num">' + p.area + '</bdi> م²</span>' +
           '<span>' + roomsCell + '</span>' +
