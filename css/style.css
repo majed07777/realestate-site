@@ -325,6 +325,29 @@ body:not(.home) .site-header {
   background-size: 180px 180px, 100% 100%, 100% 100%;
 }
 
+/* real project render behind the hero, teal-scrimmed for legibility */
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  opacity: .4;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(6, 26, 28, .5) 0%, rgba(4, 19, 20, .8) 68%, rgba(4, 19, 20, .96) 100%),
+    linear-gradient(215deg, rgba(230, 160, 58, .12) 0%, transparent 46%);
+  pointer-events: none;
+}
+.hero .lattice { z-index: 1; }
+
 .hero-inner {
   position: relative;
   z-index: 2;
@@ -481,6 +504,9 @@ body:not(.home) .site-header {
   letter-spacing: .02em;
 }
 .project-price .cur { font-size: .95rem; font-family: var(--font-body); font-weight: 500; margin-inline-start: .4rem; }
+.project-specs { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-top: 1.5rem; }
+.project-specs span { color: var(--on-dark-mute); font-size: .9rem; }
+.project-specs b { color: var(--gold); font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; margin-inline-end: .25rem; }
 .project-ledger .arrow-cta { color: var(--gold); margin-top: 1.5rem; }
 .project-ledger .arrow-cta:hover { color: var(--cream); }
 
@@ -561,26 +587,61 @@ body:not(.home) .site-header {
 .vm-item h3 { font-size: 1.2rem; color: var(--teal-800); margin-bottom: .5rem; }
 .vm-item p { color: var(--text-mute); }
 
-/* ── Portfolio: مشاريعنا الحالية والسابقة ─────────────── */
+/* ── Portfolio: مشاريعنا — جدار مشاريع بصري ────────────── */
 .portfolio-band { background: var(--bg-band); }
-.proj-columns {
+.proj-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2rem, 5vw, 4rem);
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.4vw, 1.5rem);
 }
-.proj-col h3 { font-size: 1.15rem; color: var(--teal-800); margin-bottom: 1rem; }
-.proj-list { list-style: none; margin: 0; padding: 0; }
-.proj-list li {
+.proj-card {
+  position: relative;
+  min-height: 232px;
+  overflow: hidden;
+  isolation: isolate;
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 1rem;
-  padding: .9rem 0;
-  border-top: 1px solid var(--card-border);
+  padding: 1.4rem 1.5rem;
+  color: var(--on-dark-soft);
+  background: linear-gradient(155deg, #1f5153 0%, #143a3b 55%, #0c2a2c 100%);
+  border: 1px solid rgba(92, 209, 214, .12);
+  clip-path: polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1);
 }
-.proj-list li:last-child { border-bottom: 1px solid var(--card-border); }
-.proj-list .pn { font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; color: var(--heading); }
-.proj-list .pd { color: var(--text-mute); font-size: .95rem; }
+/* drop a 3D render straight in: <img> becomes the card backdrop */
+.proj-card img {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform .7s cubic-bezier(.2, .8, .2, 1);
+}
+.proj-card::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top, rgba(4, 19, 20, .9) 0%, rgba(4, 19, 20, .4) 55%, rgba(4, 19, 20, .2) 100%);
+}
+.proj-card.no-img::after { display: none; } /* the gradient tile needs no scrim */
+.proj-card:hover { transform: translateY(-4px); }
+.proj-card:hover img { transform: scale(1.06); }
+.proj-status { font-size: .82rem; font-weight: 700; }
+.proj-status.current { color: var(--gold); }
+.proj-status.past { color: var(--teal-200); }
+.pn2 {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  color: #fff;
+  line-height: 1.15;
+}
+.pn2 small {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: .82rem;
+  color: var(--on-dark-mute);
+  margin-bottom: .25rem;
+}
+.pd2 { color: var(--on-dark-soft); margin-top: .35rem; }
 
 /* ── Values: قيمنا ────────────────────────────────────── */
 .values-grid {
@@ -1080,6 +1141,7 @@ body:not(.home) .site-header {
   .cards-grid { grid-template-columns: repeat(2, 1fr); }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
   .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .proj-grid { grid-template-columns: repeat(2, 1fr); }
   .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .why-grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); gap: 1.6rem 1.2rem; }
@@ -1103,7 +1165,7 @@ body:not(.home) .site-header {
   .cards-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; gap: 2.2rem; }
   .values-grid { grid-template-columns: 1fr; gap: 1.8rem; }
-  .proj-columns { grid-template-columns: 1fr; gap: 2.2rem; }
+  .proj-grid { grid-template-columns: 1fr; gap: 1.1rem; }
   .stats { grid-template-columns: 1fr; gap: 1.6rem; }
   .stat { flex-direction: row; align-items: baseline; }
 
