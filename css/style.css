@@ -609,6 +609,8 @@ body:not(.home) .site-header {
 }
 .proj-card {
   position: relative;
+  text-decoration: none;
+  cursor: pointer;
   min-height: 232px;
   overflow: hidden;
   isolation: isolate;
