@@ -1175,19 +1175,35 @@ body:not(.home) .site-header {
 
 /* ── Project detail: availability grid + units ────────── */
 .avail-section { margin-top: 3.2rem; }
-.avail-section h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1.3rem; }
+.avail-head { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+.avail-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.live-tag { display: inline-flex; align-items: center; gap: .45rem; font-size: .78rem; font-weight: 700; color: #2C7A52;
+  background: rgba(62, 142, 99, .12); padding: .32rem .7rem; clip-path: polygon(7px 0, 100% 0, 100% 100%, 0 100%, 0 7px); }
+.live-tag i { width: 8px; height: 8px; border-radius: 999px; background: #3E8E63; display: inline-block; }
 .avail-legend { display: flex; gap: 1.4rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
 .avail-legend span { display: inline-flex; align-items: center; gap: .5rem; font-size: .9rem; color: var(--text-soft); }
 .avail-legend i { width: 15px; height: 15px; border-radius: 4px; display: inline-block; }
-.sw-available { background: var(--gray-200); border: 1px solid var(--gray-300); }
+.sw-available { background: #3E8E63; }
 .sw-reserved { background: var(--gold); }
-.sw-sold { background: var(--teal-800); }
-.avail-grid { display: flex; flex-wrap: wrap; gap: .55rem; }
-.avail-chip { font-family: var(--font-display); font-weight: 700; font-size: 1rem; padding: .65rem .9rem; min-width: 62px; text-align: center;
-  clip-path: polygon(9px 0, 100% 0, 100% 100%, 0 100%, 0 9px); }
-.avail-chip.available { background: var(--gray-200); color: var(--teal-800); border: 1px solid var(--gray-300); }
-.avail-chip.reserved { background: var(--gold); color: var(--teal-950); }
-.avail-chip.sold { background: var(--teal-800); color: #fff; }
+.sw-sold { background: #BF5A50; }
+
+/* لوحة التوفّر المباشر: صف لكل دور × خلية لكل وحدة */
+.avail-scroll { overflow-x: auto; margin-inline: -.2rem; padding: .2rem; }
+.avail-board { display: grid; grid-template-columns: minmax(58px, auto) repeat(var(--cols), minmax(56px, 1fr));
+  gap: .5rem; align-items: stretch; }
+.ab-floor { display: flex; align-items: center; justify-content: flex-end; font-size: .82rem; font-weight: 700;
+  color: var(--text-mute); padding-inline-end: .5rem; white-space: nowrap; }
+.ab-cell { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .12rem; min-height: 54px;
+  text-decoration: none; font-family: var(--font-display); clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px);
+  transition: filter .2s ease; }
+.ab-cell b { font-weight: 700; font-size: 1.02rem; line-height: 1; }
+.ab-cell small { font-size: .64rem; opacity: .92; font-family: var(--font-body); font-weight: 500; }
+.ab-cell.available { background: #3E8E63; color: #fff; }
+.ab-cell.reserved { background: var(--gold); color: var(--teal-950); }
+.ab-cell.sold { background: #BF5A50; color: #fff; }
+a.ab-cell:hover { filter: brightness(1.07); }
+a.ab-cell:active { filter: brightness(.95); }
+.ab-cell.empty { background: transparent; clip-path: none; min-height: 0; }
 
 .units-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 3rem 0 1.4rem; }
 .units-bar h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
@@ -1203,9 +1219,9 @@ body:not(.home) .site-header {
 .unit-top { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
 .unit-code { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; color: var(--heading); }
 .unit-status { font-size: .78rem; font-weight: 700; padding: .28rem .75rem; clip-path: polygon(7px 0, 100% 0, 100% 100%, 0 100%, 0 7px); }
-.unit-status.available { background: var(--gray-200); color: var(--teal-800); }
+.unit-status.available { background: #3E8E63; color: #fff; }
 .unit-status.reserved { background: var(--gold); color: var(--teal-950); }
-.unit-status.sold { background: var(--teal-800); color: #fff; }
+.unit-status.sold { background: #BF5A50; color: #fff; }
 .unit-price { color: var(--gold-ink); font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin-top: .85rem; }
 .unit-meta { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; gap: 0; }
 .unit-meta li { display: flex; align-items: center; justify-content: space-between; gap: .8rem; padding: .5rem 0; border-top: 1px solid var(--card-border); font-size: .92rem; }
