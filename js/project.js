@@ -78,8 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* كتلة الوحدات */
   const block = document.getElementById('units-block');
   if (!p.units.length) {
-    block.innerHTML = '<div class="completed-note"><h3>هذا المشروع مكتمل</h3>' +
-      '<p>سُلّم المشروع بالكامل لأهله. تواصل معنا للاطلاع على مشاريعنا المتاحة حالياً.</p></div>';
+    block.innerHTML = p.status === 'مكتمل'
+      ? '<div class="completed-note"><h3>هذا المشروع مكتمل</h3>' +
+        '<p>سُلّم المشروع بالكامل لأهله. تواصل معنا للاطلاع على مشاريعنا المتاحة حالياً.</p></div>'
+      : '<div class="completed-note"><h3>الوحدات قريباً</h3>' +
+        '<p>المشروع تحت الإنشاء، وستُطرح تفاصيل الوحدات والأسعار قريباً بإذن الله. تواصل معنا لحجز أولوية الاطلاع.</p></div>';
     return;
   }
 
