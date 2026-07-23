@@ -49,6 +49,49 @@ function propertyCard(p) {
   );
 }
 
+/* ── مساعدات المشاريع والوحدات ─────────────────────────── */
+function projStatusClass(s) {
+  return s === 'بدأ البيع' ? 'selling' : s === 'قيد الإنشاء' ? 'building' : 'done';
+}
+function unitStatusClass(s) {
+  return s === 'متاح' ? 'available' : s === 'محجوز' ? 'reserved' : 'sold';
+}
+function projMediaHTML(p) {
+  if (p.images && p.images.length) {
+    return '<img src="' + p.images[0] + '" alt="' + p.name + ' في حي ' + p.district + '" loading="lazy">';
+  }
+  return '<span class="placeholder">' + p.code + '</span>';
+}
+function projectCard(p) {
+  const st = unitStats(p);
+  const priceHTML = p.priceFrom > 0
+    ? '<div class="pcard-price"><small>يبدأ من</small><bdi class="num">' + p.priceFrom.toLocaleString('en-US') + '</bdi> ر.س</div>'
+    : '<div class="pcard-price sold-out">مكتمل</div>';
+  const apts = st.total > 0 ? st.total : '—';
+  return (
+    '<article class="pcard">' +
+      '<a href="project.html?id=' + p.id + '" aria-label="مشروع ' + p.name + '">' +
+        '<div class="pcard-media">' + projMediaHTML(p) +
+          '<span class="status-badge ' + projStatusClass(p.status) + '">' + p.status + '</span>' +
+        '</div>' +
+      '</a>' +
+      '<div class="pcard-body">' +
+        '<span class="pcard-code">المراد ' + p.code + '</span>' +
+        '<h3><a href="project.html?id=' + p.id + '">' + p.name + '</a></h3>' +
+        '<p class="pcard-place">' + ICONS.pin + 'حي ' + p.district + '، جدة</p>' +
+        '<div class="pcard-stats">' +
+          '<div><b class="num">' + p.floors + '</b><span>أدوار</span></div>' +
+          '<div><b class="num">' + apts + '</b><span>وحدات</span></div>' +
+          '<div><b class="num">' + p.annexes + '</b><span>ملاحق</span></div>' +
+        '</div>' +
+        '<div class="pcard-foot">' + priceHTML +
+          '<a class="arrow-cta" href="project.html?id=' + p.id + '">المشروع ' + ICONS.arrow + '</a>' +
+        '</div>' +
+      '</div>' +
+    '</article>'
+  );
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   /* حالة الترويسة عند التمرير */
   const header = document.querySelector('.site-header');
