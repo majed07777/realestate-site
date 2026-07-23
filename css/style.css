@@ -326,7 +326,8 @@ body:not(.home) .site-header {
 }
 
 /* real project render behind the hero, teal-scrimmed for legibility */
-.hero-photo {
+.hero-photo,
+.hero-video {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -336,6 +337,8 @@ body:not(.home) .site-header {
   object-position: center 42%;
   opacity: .4;
 }
+/* video sits above the still poster/photo; if the file is absent, the photo shows */
+.hero-video { z-index: 0; }
 .hero::after {
   content: "";
   position: absolute;
@@ -512,11 +515,21 @@ body:not(.home) .site-header {
 
 /* ── Services band (deep teal accent) ─────────────────── */
 .services-band {
+  position: relative;
+  overflow: hidden;
   color: var(--on-dark-soft);
   background:
     var(--grain-dark),
-    linear-gradient(180deg, #0f3133 0%, #163e40 50%, #0c2a2c 100%);
+    linear-gradient(160deg, #10393b 0%, #17403f 34%, #0f3033 62%, #0a2426 100%);
   background-size: 180px 180px, 100% 100%;
+}
+.services-band .wrap { position: relative; z-index: 2; }
+.services-band .lattice { z-index: 1; opacity: .5; }
+/* mirror the hero motif to the opposite edge so it reads as continuity, not a repeat */
+.lattice-r {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+  transform: scaleX(-1);
 }
 .services-band .section-open h2 { color: #fff; }
 
