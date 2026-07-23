@@ -86,17 +86,45 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  const st2 = unitStats(p);
   const legend =
     '<div class="avail-legend">' +
-      '<span><i class="sw-available"></i> متاح</span>' +
+      '<span><i class="sw-available"></i> متاح <bdi class="num">(' + st2.available + ')</bdi></span>' +
       '<span><i class="sw-reserved"></i> محجوز</span>' +
       '<span><i class="sw-sold"></i> مباع</span>' +
     '</div>';
-  const gridChips = '<div class="avail-grid">' + p.units.map((u) =>
-    '<span class="avail-chip ' + unitStatusClass(u.status) + '">' + u.code + '</span>').join('') + '</div>';
+
+  // لوحة التوفّر: صف لكل دور، وخلية لكل وحدة، ملوّنة بحالتها
+  function availCell(u) {
+    const cls = unitStatusClass(u.status);
+    const priceLine = u.status === 'مباع' ? '' : ' — ' + u.price.toLocaleString('en-US') + ' ر.س';
+    const title = u.type + ' · ' + u.floor + ' · ' + u.status + priceLine;
+    if (u.status === 'مباع') {
+      return '<span class="ab-cell sold" title="' + title + '"><b>' + u.code + '</b><small>مباع</small></span>';
+    }
+    const wa = waLink('السلام عليكم، أرغب بالاستفسار عن الوحدة ' + u.code + ' في مشروع ' + p.name + ' (' + p.code + ').');
+    return '<a class="ab-cell ' + cls + '" href="' + wa + '" target="_blank" rel="noopener" title="' + title +
+      '"><b>' + u.code + '</b><small>' + u.status + '</small></a>';
+  }
+  const floorOrder = [];
+  const byFloor = new Map();
+  p.units.forEach((u) => {
+    if (!byFloor.has(u.floor)) { byFloor.set(u.floor, []); floorOrder.push(u.floor); }
+    byFloor.get(u.floor).push(u);
+  });
+  const maxCols = Math.max(...floorOrder.map((f) => byFloor.get(f).length));
+  const boardRows = floorOrder.map((f) => {
+    const us = byFloor.get(f);
+    let cells = us.map(availCell).join('');
+    for (let k = us.length; k < maxCols; k++) cells += '<span class="ab-cell empty" aria-hidden="true"></span>';
+    return '<div class="ab-floor">' + f + '</div>' + cells;
+  }).join('');
+  const board = '<div class="avail-scroll"><div class="avail-board" style="--cols:' + maxCols + '">' +
+    boardRows + '</div></div>';
 
   block.innerHTML =
-    '<section class="avail-section"><h2>توفّر الوحدات</h2>' + legend + gridChips + '</section>' +
+    '<section class="avail-section"><div class="avail-head"><h2>توفّر الوحدات</h2>' +
+      '<span class="live-tag"><i></i>محدّث مباشرة</span></div>' + legend + board + '</section>' +
     '<div class="units-bar"><h2>وحدات المشروع</h2>' +
       '<div class="units-filter" id="units-filter" role="group" aria-label="تصفية الوحدات بالحالة">' +
         '<button type="button" data-s="all" aria-pressed="true">الكل</button>' +
