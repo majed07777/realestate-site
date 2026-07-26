@@ -42,7 +42,7 @@ function makeUnits(models, floors, priceStep) {
         area: m.area,
         rooms: m.rooms,
         baths: m.baths,
-        price: m.price + fi * (priceStep || 15000),
+        price: m.price + fi * (priceStep === undefined ? 15000 : priceStep),
         status: m.status || _statusCycle[i % _statusCycle.length],
       });
       i++;
@@ -55,35 +55,35 @@ function makeUnits(models, floors, priceStep) {
 
 // 107 — تاون هاوس: ٨ وحدات على دورين + ملحقان علويان = ١٠ وحدات
 const U107 = [
-  { code: 'TH1', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 268, rooms: 6, baths: 5, price: 2150000, status: 'مباع' },
-  { code: 'TH2', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 268, rooms: 6, baths: 5, price: 2150000, status: 'محجوز' },
-  { code: 'TH3', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 264, rooms: 6, baths: 5, price: 2100000, status: 'متاح' },
-  { code: 'TH4', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 264, rooms: 6, baths: 5, price: 2100000, status: 'متاح' },
-  { code: 'TH5', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1990000, status: 'مباع' },
-  { code: 'TH6', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1990000, status: 'متاح' },
-  { code: 'TH7', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 256, rooms: 5, baths: 5, price: 1950000, status: 'محجوز' },
-  { code: 'TH8', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 256, rooms: 5, baths: 5, price: 1950000, status: 'متاح' },
-  { code: 'M1', model: 'M', type: 'ملحق علوي', facing: 'أمامية', floor: 'علوي', area: 274, rooms: 6, baths: 5, price: 2300000, status: 'متاح' },
-  { code: 'M2', model: 'M', type: 'ملحق علوي', facing: 'خلفية', floor: 'علوي', area: 270, rooms: 6, baths: 5, price: 2250000, status: 'محجوز' },
+  { code: 'TH1', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'مباع' },
+  { code: 'TH2', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'محجوز' },
+  { code: 'TH3', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'متاح' },
+  { code: 'TH4', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'متاح' },
+  { code: 'TH5', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'مباع' },
+  { code: 'TH6', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
+  { code: 'TH7', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'محجوز' },
+  { code: 'TH8', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
+  { code: 'M1', model: 'M', type: 'ملحق علوي', facing: 'أمامية', floor: 'علوي', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'متاح' },
+  { code: 'M2', model: 'M', type: 'ملحق علوي', facing: 'خلفية', floor: 'علوي', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'محجوز' },
 ];
 
 // 108 — هومز: ٣ شقق في الدور × ٤ أدوار + ملحق علوي = ١٣ وحدة
 const U108 = makeUnits([
-  { code: 'A', facing: 'أمامية', area: 112, rooms: 2, baths: 3, price: 1150000 },
-  { code: 'B', facing: 'أمامية', area: 106, rooms: 2, baths: 3, price: 1080000 },
-  { code: 'C', facing: 'خلفية', area: 105, rooms: 2, baths: 3, price: 990000 },
-], ['الأول', 'الثاني', 'الثالث', 'الرابع'], 20000);
-U108.push({ code: 'M1', model: 'M', type: 'ملحق علوي', facing: 'أمامية', floor: 'علوي', area: 120, rooms: 3, baths: 3, price: 1290000, status: 'متاح' });
+  { code: 'A', facing: 'أمامية', area: 106, rooms: 2, baths: 3, price: 580000 },
+  { code: 'B', facing: 'أمامية', area: 105, rooms: 2, baths: 3, price: 560000 },
+  { code: 'C', facing: 'خلفية', area: 100, rooms: 2, baths: 3, price: 550000 },
+], ['الأول', 'الثاني', 'الثالث', 'الرابع'], 0);
+U108.push({ code: 'M1', model: 'M', type: 'ملحق دور كامل', facing: 'أمامية', floor: 'علوي', area: 320, rooms: 4, baths: 4, price: 1450000, status: 'متاح' });
 
 // 109 — أفينيو: ٤ شقق في الدور × ٤ أدوار + ملحقان = ١٨ وحدة
 const U109 = makeUnits([
-  { code: 'A', facing: 'أمامية واجهتين', area: 119, rooms: 3, baths: 3, price: 900000 },
-  { code: 'B', facing: 'أمامية', area: 121, rooms: 3, baths: 3, price: 880000 },
-  { code: 'C', facing: 'أمامية', area: 128, rooms: 3, baths: 3, price: 930000 },
-  { code: 'D', facing: 'خلفية', area: 128, rooms: 3, baths: 3, price: 870000 },
-], ['الأول', 'الثاني', 'الثالث', 'الرابع'], 18000);
-U109.push({ code: 'M1', model: 'M', type: 'ملحق علوي', facing: 'أمامية', floor: 'علوي', area: 135, rooms: 3, baths: 3, price: 980000, status: 'متاح' });
-U109.push({ code: 'M2', model: 'M', type: 'ملحق علوي', facing: 'خلفية', floor: 'علوي', area: 132, rooms: 3, baths: 3, price: 950000, status: 'محجوز' });
+  { code: 'A', facing: 'واجهتين', area: 119, rooms: 3, baths: 3, price: 850000 },
+  { code: 'B', facing: 'واجهة شرقية', area: 121, rooms: 3, baths: 3, price: 780000 },
+  { code: 'C', facing: 'واجهة جنوبية', area: 128, rooms: 3, baths: 3, price: 790000 },
+  { code: 'D', facing: 'داخلية', area: 128, rooms: 3, baths: 3, price: 760000 },
+], ['الأول', 'الثاني', 'الثالث', 'الرابع'], 0);
+U109.push({ code: 'M1', model: 'M', type: 'ملحق علوي', facing: 'واجهتين شرقية وجنوبية', floor: 'علوي', area: 246, rooms: 4, baths: 4, price: 1750000, status: 'متاح' });
+U109.push({ code: 'M2', model: 'M', type: 'ملحق علوي', facing: 'واجهة شرقية', floor: 'علوي', area: 246, rooms: 4, baths: 4, price: 1720000, status: 'محجوز' });
 
 // 106 — السلامة: دورين × ٢ شقة + دوبلكس بدورين = ٧ وحدات
 const U106 = makeUnits([
@@ -95,7 +95,7 @@ U106.push({ code: 'DX', model: 'DX', type: 'دوبلكس', facing: 'أمامية
 const PROJECTS = [
   {
     id: 107, code: '107', name: 'المراد تاون هاوس', district: 'الزهراء',
-    status: 'بدأ البيع', completion: 100, floors: 2, annexes: 2, priceFrom: 1950000,
+    status: 'بدأ البيع', completion: 100, floors: 2, annexes: 2, priceFrom: 1675000,
     desc: 'تاون هاوس فاخر مقسم على دورين مع سطح رحب في قلب حي الزهراء بجدة، قرب الواجهة البحرية وكل الخدمات، حيث تلتقي الفخامة بالراحة في تصميم عصري.',
     features: ['ثماني وحدات على دورين', 'ملحقان علويان', 'سطح رحب خاص', 'غرفة عاملة منزلية بحمامها', 'مكيفات دكت مخفية', 'مستودع خاص', 'مصعد بالمشروع', 'دخول ذكي'],
     images: ['assets/projects/th107-exterior.jpg', 'assets/projects/th107-bedroom.jpg', 'assets/projects/th107-plan.jpg', 'assets/projects/th107-lifestyle.jpg'],
@@ -103,9 +103,9 @@ const PROJECTS = [
   },
   {
     id: 108, code: '108', name: 'المراد هومز', district: 'النعيم',
-    status: 'بدأ البيع', completion: 100, floors: 4, annexes: 1, priceFrom: 990000,
-    desc: 'شقق عصرية بنماذج تتراوح بين 105 و112م²، ثلاث شقق في كل دور على أربعة أدوار مع ملحق علوي، تصميم ذكي للمساحات ومدخل خاص لكل وحدة، مثالية للسكن أو الاستثمار في حي النعيم.',
-    features: ['نماذج 105–112م²', 'ثلاث شقق لكل دور', 'ملحق علوي', 'مدخلان لكل وحدة', 'دخول ذكي', 'غاز مركزي', 'كاميرات مراقبة', 'موقف خاص'],
+    status: 'بدأ البيع', completion: 100, floors: 4, annexes: 1, priceFrom: 550000,
+    desc: 'شقق عصرية بنماذج تتراوح بين 100 و106م²، ثلاث شقق في كل دور على أربعة أدوار مع ملحق دور كامل، تصميم ذكي للمساحات ومدخل خاص لكل وحدة، مثالية للسكن أو الاستثمار في حي النعيم.',
+    features: ['نماذج 100–106م²', 'ثلاث شقق لكل دور', 'ملحق دور كامل', 'مدخلان لكل وحدة', 'دخول ذكي', 'غاز مركزي', 'كاميرات مراقبة', 'موقف خاص'],
     images: ['assets/projects/homes108-living.jpg', 'assets/projects/homes108-plan.jpg', 'assets/projects/homes108-investment.jpg'],
     units: U108,
   },
@@ -119,10 +119,22 @@ const PROJECTS = [
   },
   {
     id: 109, code: '109', name: 'المراد أفينيو', district: 'الزهراء',
-    status: 'قيد الإنشاء', completion: 70, floors: 4, annexes: 2, priceFrom: 870000,
+    status: 'قيد الإنشاء', completion: 70, floors: 4, annexes: 2, priceFrom: 760000,
     desc: 'مشروع سكني عصري بأربعة نماذج (119–128م²)، أربع شقق في كل دور على أربعة أدوار مع ملحقين علويين في موقع مميز بحي الزهراء. نسبة الإنجاز 70% والتسليم قريباً بإذن الله.',
-    features: ['أربعة نماذج 119–128م²', 'أربع شقق لكل دور', 'ملحقان علويان', 'نماذج أمامية وخلفية', 'دخول ذكي', 'مواقف خاصة'],
-    images: [],
+    features: ['أربعة نماذج 119–128م²', 'أربع شقق لكل دور', 'ملحقان علويان', 'واجهات شرقية وجنوبية', 'دخول ذكي', 'مواقف خاصة'],
+    images: [
+      'assets/projects/av109-exterior.jpg',
+      'assets/projects/av109-living1.jpg',
+      'assets/projects/av109-living3.jpg',
+      'assets/projects/av109-dining1.jpg',
+      'assets/projects/av109-bedroom.jpg',
+      'assets/projects/av109-living2.jpg',
+      'assets/projects/av109-living4.jpg',
+      'assets/projects/av109-dining2.jpg',
+      'assets/projects/av109-family.jpg',
+      'assets/projects/av109-plan1.jpg',
+      'assets/projects/av109-plan2.jpg',
+    ],
     units: U109,
   },
   { id: 110, code: '110', name: 'المراد 110', district: 'الفيصلية', status: 'قيد الإنشاء', completion: 15, floors: 4, annexes: 0, priceFrom: 0, desc: 'مشروعنا الجديد في حي الفيصلية بجدة، تحت الإنشاء حالياً. تفاصيل الوحدات والأسعار قريباً بإذن الله.', features: [], images: [], units: [] },
