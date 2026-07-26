@@ -1425,6 +1425,12 @@ a.ab-cell:active { filter: brightness(.95); }
   .services-grid { grid-template-columns: 1fr; gap: 2.2rem; }
   .values-grid { grid-template-columns: 1fr; gap: 1.8rem; }
   .proj-grid { grid-template-columns: 1fr; gap: 1.1rem; }
+  /* current-projects grid: one big card per row on phones (override the higher-specificity 2-col rule) */
+  .proj-grid:not(.proj-grid-done) { grid-template-columns: 1fr; }
+  .proj-grid:not(.proj-grid-done) .proj-card { min-height: 0; }
+  .proj-grid:not(.proj-grid-done) > img,
+  .proj-card:not(.no-img) > img { height: clamp(200px, 58vw, 280px); }
+  .proj-grid-done { grid-template-columns: repeat(2, 1fr); }
   .units-grid { grid-template-columns: 1fr; }
   .units-bar { flex-direction: column; align-items: flex-start; }
   .stats { grid-template-columns: 1fr; gap: 1.6rem; }
