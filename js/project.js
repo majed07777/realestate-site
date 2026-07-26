@@ -134,8 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // لوحة التوفّر: صف لكل دور، وخلية لكل وحدة، ملوّنة بحالتها
   function availCell(u) {
     const cls = unitStatusClass(u.status);
-    const priceLine = u.status === 'مباع' ? '' : ' — ' + u.price.toLocaleString('en-US') + ' ر.س';
-    const title = u.type + ' · ' + u.floor + ' · ' + u.status + priceLine;
+    const priceLine = (u.status === 'مباع' || !u.price) ? '' : ' — ' + u.price.toLocaleString('en-US') + ' ر.س';
+    const title = u.type + ' ' + u.code + ' · ' + u.floor + ' · ' + u.status + priceLine;
     if (u.status === 'مباع') {
       return '<span class="ab-cell sold" title="' + title + '"><b>' + u.code + '</b><small>مباع</small></span>';
     }
@@ -158,10 +158,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }).join('');
   const board = '<div class="avail-scroll"><div class="avail-board" style="--cols:' + maxCols + '">' +
     boardRows + '</div></div>';
+  const availSection = '<section class="avail-section"><div class="avail-head"><h2>توفّر الوحدات</h2>' +
+    '<span class="live-tag"><i></i>محدّث مباشرة</span></div>' + legend + board + '</section>';
 
-  block.innerHTML =
-    '<section class="avail-section"><div class="avail-head"><h2>توفّر الوحدات</h2>' +
-      '<span class="live-tag"><i></i>محدّث مباشرة</span></div>' + legend + board + '</section>' +
+  // مشاريع بجدول حجوزات فقط (بدون تفاصيل وحدات كاملة بعد)
+  if (p.boardOnly) {
+    block.innerHTML = availSection +
+      '<div class="completed-note"><h3>تفاصيل النماذج قريباً</h3>' +
+      '<p>مساحات النماذج ومخططاتها تُعلن قريباً بإذن الله. تواصل معنا للاستفسار أو لحجز وحدتك.</p></div>';
+    return;
+  }
+
+  block.innerHTML = availSection +
     '<div class="units-bar"><h2>وحدات المشروع</h2>' +
       '<div class="units-filter" id="units-filter" role="group" aria-label="تصفية الوحدات بالحالة">' +
         '<button type="button" data-s="all" aria-pressed="true">الكل</button>' +
