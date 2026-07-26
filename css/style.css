@@ -320,8 +320,8 @@ body:not(.home) .site-header {
   color: var(--on-dark);
   background-image:
     var(--grain-dark),
-    linear-gradient(215deg, rgba(230, 160, 58, .16) 0%, rgba(230, 160, 58, .05) 24%, transparent 48%),
-    linear-gradient(180deg, #0f3133 0%, #1A4648 22%, #0c2a2c 55%, #041314 100%);
+    linear-gradient(215deg, rgba(230, 160, 58, .14) 0%, rgba(230, 160, 58, .04) 24%, transparent 48%),
+    linear-gradient(180deg, #1e5250 0%, #1a4a48 30%, #143c3d 70%, #0e2f31 100%);
   background-size: 180px 180px, 100% 100%, 100% 100%;
 }
 
@@ -336,13 +336,13 @@ body:not(.home) .site-header {
   height: 100%;
   object-fit: cover;
   object-position: center 42%;
-  opacity: .5;
+  opacity: .82;
 }
 /* always-visible base render (fallback + fills the crossfade gaps) */
-.hero-photo { opacity: .5; }
+.hero-photo { opacity: .82; }
 
 /* cinematic crossfade of real renders behind the hero */
-.hero-media { overflow: hidden; opacity: .5; }
+.hero-media { overflow: hidden; opacity: .82; }
 .hero-slide {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: center 42%;
@@ -362,7 +362,7 @@ body:not(.home) .site-header {
 
 /* optional video: hidden until a real assets/hero.mp4 loads (JS adds .ready) */
 .hero-video { opacity: 0; transition: opacity 1s ease; }
-.hero-video.ready { opacity: .5; }
+.hero-video.ready { opacity: .82; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-slide { animation: none; opacity: 0; } /* static base render shows */
@@ -373,8 +373,9 @@ body:not(.home) .site-header {
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(180deg, rgba(6, 26, 28, .5) 0%, rgba(4, 19, 20, .8) 68%, rgba(4, 19, 20, .96) 100%),
-    linear-gradient(215deg, rgba(230, 160, 58, .12) 0%, transparent 46%);
+    linear-gradient(to left, rgba(4, 19, 20, .74) 0%, rgba(4, 19, 20, .5) 32%, rgba(4, 19, 20, .14) 66%, transparent 100%),
+    linear-gradient(180deg, rgba(6, 26, 28, .22) 0%, transparent 32%, transparent 64%, rgba(4, 19, 20, .5) 100%),
+    linear-gradient(215deg, rgba(230, 160, 58, .10) 0%, transparent 42%);
   pointer-events: none;
 }
 .hero .lattice { z-index: 1; }
