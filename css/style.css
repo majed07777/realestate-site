@@ -602,11 +602,22 @@ body:not(.home) .site-header {
 
 /* ── Portfolio: مشاريعنا — جدار مشاريع بصري ────────────── */
 .portfolio-band { background: var(--bg-band); }
+.proj-subhead {
+  font-size: 1.15rem;
+  color: var(--teal-800);
+  margin: clamp(2rem, 4vw, 3rem) 0 1.2rem;
+}
+.section-open + .proj-subhead { margin-top: clamp(1.2rem, 2vw, 1.6rem); }
+.proj-subhead .chev { padding-inline-start: 1rem; }
 .proj-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(1rem, 2.4vw, 1.5rem);
 }
+/* completed projects: quieter, more compact tiles */
+.proj-grid-done { grid-template-columns: repeat(4, 1fr); }
+.proj-grid-done .proj-card { min-height: 168px; }
+.proj-grid-done .pn2 { font-size: clamp(1.5rem, 2.4vw, 1.9rem); }
 .proj-card {
   position: relative;
   text-decoration: none;
