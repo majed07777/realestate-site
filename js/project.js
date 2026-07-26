@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '<ul class="unit-meta">' +
           '<li><span>النوع</span><b>' + u.type + '</b></li>' +
           '<li><span>الدور</span><b>' + u.floor + '</b></li>' +
-          '<li><span>الجهة</span><b>' + u.facing + '</b></li>' +
+          (u.facing ? '<li><span>الجهة</span><b>' + u.facing + '</b></li>' : '') +
           '<li><span>المساحة</span><b><bdi class="num">' + u.area + '</bdi> م²</b></li>' +
           '<li><span>الغرف</span><b><bdi class="num">' + u.rooms + '</bdi></b></li>' +
           '<li><span>دورات المياه</span><b><bdi class="num">' + u.baths + '</bdi></b></li>' +
