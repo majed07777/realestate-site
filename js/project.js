@@ -19,16 +19,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const galMain = document.getElementById('gallery-main');
   const thumbs = document.getElementById('gallery-thumbs');
   if (p.images && p.images.length) {
-    galMain.innerHTML = '<img id="gallery-main-img" src="' + p.images[0] + '" alt="' + p.name + ' في حي ' + p.district + '">';
+    let galIndex = 0;
+    const capFor = (i) => p.name + ' ' + p.code + ' · تصميم ' + (i + 1) + ' من ' + p.images.length;
+    galMain.classList.add('has-zoom');
+    galMain.innerHTML =
+      '<img id="gallery-main-img" src="' + p.images[0] + '" alt="' + p.name + ' في حي ' + p.district + '">' +
+      '<span class="gallery-count" id="gallery-count">1 / ' + p.images.length + '</span>' +
+      '<span class="gallery-zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2M11 8v6M8 11h6"/></svg></span>';
     const mainImg = document.getElementById('gallery-main-img');
+    const galCount = document.getElementById('gallery-count');
     thumbs.innerHTML = p.images.map((src, i) =>
       '<button type="button" class="' + (i === 0 ? 'active' : '') + '" data-index="' + i +
       '" aria-label="عرض الصورة ' + (i + 1) + '"><img src="' + src + '" alt="" loading="lazy"></button>').join('');
+    const setMain = (i) => {
+      galIndex = i;
+      mainImg.src = p.images[i];
+      galCount.textContent = (i + 1) + ' / ' + p.images.length;
+      thumbs.querySelectorAll('button').forEach((b) => b.classList.toggle('active', +b.dataset.index === i));
+    };
     thumbs.addEventListener('click', (e) => {
       const btn = e.target.closest('button[data-index]');
       if (!btn) return;
-      mainImg.src = p.images[parseInt(btn.dataset.index, 10)];
-      thumbs.querySelectorAll('button').forEach((b) => b.classList.toggle('active', b === btn));
+      setMain(parseInt(btn.dataset.index, 10));
+    });
+
+    /* Lightbox */
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCap = document.getElementById('lb-caption');
+    let lbIndex = 0;
+    const showLb = (i) => {
+      lbIndex = (i + p.images.length) % p.images.length;
+      lbImg.src = p.images[lbIndex];
+      lbImg.alt = capFor(lbIndex);
+      lbCap.textContent = capFor(lbIndex);
+    };
+    const openLb = () => { showLb(galIndex); lb.hidden = false; document.body.style.overflow = 'hidden'; };
+    const closeLb = () => { lb.hidden = true; document.body.style.overflow = ''; setMain(lbIndex); };
+    galMain.addEventListener('click', openLb);
+    document.getElementById('lb-close').addEventListener('click', closeLb);
+    document.getElementById('lb-next').addEventListener('click', () => showLb(lbIndex + 1));
+    document.getElementById('lb-prev').addEventListener('click', () => showLb(lbIndex - 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+    document.addEventListener('keydown', (e) => {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') closeLb();
+      else if (e.key === 'ArrowLeft') showLb(lbIndex + 1);
+      else if (e.key === 'ArrowRight') showLb(lbIndex - 1);
     });
   } else {
     galMain.innerHTML = '<div class="placeholder" style="position:absolute;inset:0;display:flex;align-items:center;' +
