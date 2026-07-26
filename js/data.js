@@ -64,8 +64,10 @@ const U107 = [
   { code: 'TH7', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'محجوز' },
   { code: 'TH8', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
   { code: 'M1', model: 'M', type: 'ملحق علوي', facing: 'أمامية', floor: 'علوي', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'متاح' },
-  { code: 'M2', model: 'M', type: 'ملحق علوي', facing: 'خلفية', floor: 'علوي', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'محجوز' },
+  { code: 'M2', model: 'M', type: 'ملحق علوي', facing: 'خلفية', floor: 'علوي', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'متاح' },
 ];
+// 107 — جميع الوحدات متاحة (حسب لوحة تحديثات البيع)
+U107.forEach((u) => { u.status = 'متاح'; });
 
 // 108 — هومز: ٣ شقق في الدور × ٤ أدوار + ملحق علوي = ١٣ وحدة
 const U108 = makeUnits([
@@ -116,7 +118,7 @@ const PROJECTS = [
     status: 'بدأ البيع', completion: 30, floors: 4, annexes: 1, priceFrom: 550000,
     desc: 'شقق عصرية بنماذج تتراوح بين 100 و106م²، ثلاث شقق في كل دور على أربعة أدوار مع ملحق دور كامل، تصميم ذكي للمساحات ومدخل خاص لكل وحدة، مثالية للسكن أو الاستثمار في حي النعيم.',
     features: ['نماذج 100–106م²', 'ثلاث شقق لكل دور', 'ملحق دور كامل', 'مدخلان لكل وحدة', 'دخول ذكي', 'غاز مركزي', 'كاميرات مراقبة', 'موقف خاص'],
-    images: ['assets/projects/homes108-living.jpg', 'assets/projects/homes108-plan.jpg', 'assets/projects/homes108-investment.jpg'],
+    images: ['assets/projects/homes108-exterior.jpg', 'assets/projects/homes108-majlis.jpg', 'assets/projects/homes108-living.jpg', 'assets/projects/homes108-dining.jpg', 'assets/projects/homes108-plan.jpg', 'assets/projects/homes108-investment.jpg'],
     units: U108,
   },
   {
