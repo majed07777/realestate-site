@@ -686,6 +686,37 @@ body:not(.home) .site-header {
 .proj-card.no-img::after { display: none; } /* the gradient tile needs no scrim */
 .proj-card:hover { transform: translateY(-4px); }
 .proj-card:hover img { transform: scale(1.06); }
+
+/* image cards: render shown large as a real picture, info in a solid band below */
+.proj-card:not(.no-img) {
+  padding: 0;
+  justify-content: flex-start;
+  background: var(--teal-800);
+}
+.proj-card:not(.no-img) > img {
+  position: static;
+  z-index: 0;
+  width: 100%;
+  height: clamp(240px, 27vw, 360px);
+}
+.proj-card:not(.no-img)::after { display: none; } /* no dimming over the picture */
+.proj-card:not(.no-img) > div {
+  width: 100%;
+  padding: 1.1rem 1.4rem 1.3rem;
+  background: var(--teal-800);
+}
+.proj-card:not(.no-img) .proj-status {
+  position: absolute;
+  top: 1rem;
+  inset-inline-end: 1.2rem;
+  z-index: 2;
+  color: #fff;
+  background: rgba(4, 19, 20, .55);
+  padding: .34rem .78rem;
+  clip-path: polygon(7px 0, 100% 0, 100% 100%, 0 100%, 0 7px);
+}
+.proj-card:not(.no-img) .proj-status.current { color: var(--gold); }
+
 .proj-status { font-size: .82rem; font-weight: 700; }
 .proj-status.current { color: var(--gold); }
 .proj-status.past { color: var(--teal-200); }
