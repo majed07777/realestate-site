@@ -125,6 +125,14 @@ document.addEventListener('DOMContentLoaded', () => {
     el.innerHTML = '<bdi class="num">' + SITE.whatsappDisplay + '</bdi>';
   });
 
+  /* فيديو البطل الاختياري: يظهر فقط إن وُجد ملف حقيقي assets/hero.mp4 */
+  const heroVideo = document.querySelector('.hero-video');
+  if (heroVideo) {
+    heroVideo.addEventListener('loadeddata', () => {
+      if (heroVideo.readyState >= 2 && heroVideo.videoWidth > 0) heroVideo.classList.add('ready');
+    });
+  }
+
   /* السنة في التذييل */
   document.querySelectorAll('[data-year]').forEach((el) => {
     el.textContent = new Date().getFullYear();
