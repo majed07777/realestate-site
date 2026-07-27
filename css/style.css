@@ -691,7 +691,7 @@ body:not(.home) .site-header {
 .proj-card:not(.no-img) {
   padding: 0;
   justify-content: flex-start;
-  background: var(--teal-800);
+  background: var(--teal-950);
 }
 .proj-card:not(.no-img) > img {
   position: static;
@@ -703,7 +703,7 @@ body:not(.home) .site-header {
 .proj-card:not(.no-img) > div {
   width: 100%;
   padding: 1.1rem 1.4rem 1.3rem;
-  background: var(--teal-800);
+  background: var(--teal-950);
 }
 .proj-card:not(.no-img) .proj-status {
   position: absolute;
