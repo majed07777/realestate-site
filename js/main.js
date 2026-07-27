@@ -138,6 +138,22 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = new Date().getFullYear();
   });
 
+  /* إثراء بطاقات المشاريع الحالية بالسعر والتوفّر (تحسين تدريجي) */
+  if (typeof projectById === 'function') {
+    document.querySelectorAll('.proj-grid:not(.proj-grid-done) .proj-card:not(.no-img)[href*="project.html?id="]').forEach((card) => {
+      const id = new URLSearchParams(card.getAttribute('href').split('?')[1] || '').get('id');
+      const p = projectById(id);
+      const body = card.querySelector(':scope > div');
+      if (!p || !body || card.querySelector('.pcard-go')) return;
+      const st = unitStats(p);
+      const parts = [];
+      if (p.priceFrom > 0) parts.push('<span class="pcard-from">يبدأ من <bdi class="num">' + p.priceFrom.toLocaleString('en-US') + '</bdi> ر.س</span>');
+      if (st.available > 0) parts.push('<span class="pcard-avail"><bdi class="num">' + st.available + '</bdi> وحدة متاحة</span>');
+      const meta = parts.length ? '<div class="pcard-meta">' + parts.join('') + '</div>' : '';
+      body.insertAdjacentHTML('beforeend', meta + '<span class="pcard-go">عرض المشروع ' + ICONS.arrow + '</span>');
+    });
+  }
+
   /* عدّادات الأرقام: القيمة النهائية موجودة في HTML دائماً؛
      التحريك إضافة فقط، وإن لم يعمل تبقى القيمة كاملة */
   const counters = document.querySelectorAll('[data-count]');
