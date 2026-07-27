@@ -687,23 +687,37 @@ body:not(.home) .site-header {
 .proj-card:hover { transform: translateY(-4px); }
 .proj-card:hover img { transform: scale(1.06); }
 
-/* image cards: render shown large as a real picture, info in a solid band below */
+/* image cards: render fills the whole card; info floats over a soft bottom gradient
+   so the building's face stays visible (no hard black band) */
 .proj-card:not(.no-img) {
   padding: 0;
-  justify-content: flex-start;
+  justify-content: flex-end;
   background: var(--teal-950);
+  min-height: clamp(340px, 34vw, 460px);
 }
 .proj-card:not(.no-img) > img {
-  position: static;
+  position: absolute;
+  inset: 0;
   z-index: 0;
   width: 100%;
-  height: clamp(240px, 27vw, 360px);
+  height: 100%;
 }
-.proj-card:not(.no-img)::after { display: none; } /* no dimming over the picture */
+.proj-card:not(.no-img)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  background: linear-gradient(to top,
+    rgba(4, 19, 20, .95) 0%, rgba(4, 19, 20, .82) 14%, rgba(4, 19, 20, .5) 30%,
+    rgba(4, 19, 20, .18) 44%, transparent 60%);
+}
 .proj-card:not(.no-img) > div {
+  position: relative;
+  z-index: 2;
   width: 100%;
-  padding: 1.1rem 1.4rem 1.3rem;
-  background: var(--teal-950);
+  padding: 1.1rem 1.4rem 1.4rem;
+  background: transparent;
 }
 .proj-card:not(.no-img) .proj-status {
   position: absolute;
@@ -711,11 +725,28 @@ body:not(.home) .site-header {
   inset-inline-end: 1.2rem;
   z-index: 2;
   color: #fff;
-  background: rgba(4, 19, 20, .55);
+  background: rgba(4, 19, 20, .5);
   padding: .34rem .78rem;
   clip-path: polygon(7px 0, 100% 0, 100% 100%, 0 100%, 0 7px);
 }
 .proj-card:not(.no-img) .proj-status.current { color: var(--gold); }
+
+/* price + availability + arrow (injected by JS as progressive enhancement) */
+.pcard-meta { display: flex; align-items: center; gap: .5rem .9rem; flex-wrap: wrap; margin-top: .7rem; }
+.pcard-from { font-family: var(--font-display); font-weight: 700; color: #fff; font-size: 1.02rem; }
+.pcard-from .num { color: var(--gold); }
+.pcard-avail {
+  font-size: .78rem; font-weight: 500; color: #DFF3E4;
+  background: rgba(62, 142, 99, .32);
+  padding: .22rem .62rem;
+  clip-path: polygon(6px 0, 100% 0, 100% 100%, 0 100%, 0 6px);
+}
+.pcard-go {
+  display: inline-flex; align-items: center; gap: .4rem;
+  margin-top: .85rem; color: var(--gold); font-weight: 700; font-size: .92rem;
+}
+.pcard-go svg { width: 18px; height: 18px; transition: transform .35s cubic-bezier(.2, .8, .2, 1); }
+.proj-card:hover .pcard-go svg { transform: translate(-4px, -4px); }
 
 .proj-status { font-size: .82rem; font-weight: 700; }
 .proj-status.current { color: var(--gold); }
@@ -1427,9 +1458,7 @@ a.ab-cell:active { filter: brightness(.95); }
   .proj-grid { grid-template-columns: 1fr; gap: 1.1rem; }
   /* current-projects grid: one big card per row on phones (override the higher-specificity 2-col rule) */
   .proj-grid:not(.proj-grid-done) { grid-template-columns: 1fr; }
-  .proj-grid:not(.proj-grid-done) .proj-card { min-height: 0; }
-  .proj-grid:not(.proj-grid-done) > img,
-  .proj-card:not(.no-img) > img { height: clamp(200px, 58vw, 280px); }
+  .proj-grid:not(.proj-grid-done) .proj-card:not(.no-img) { min-height: clamp(330px, 82vw, 440px); }
   .proj-grid-done { grid-template-columns: repeat(2, 1fr); }
   .units-grid { grid-template-columns: 1fr; }
   .units-bar { flex-direction: column; align-items: flex-start; }
