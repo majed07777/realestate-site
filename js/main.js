@@ -138,19 +138,24 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = new Date().getFullYear();
   });
 
-  /* إثراء بطاقات المشاريع الحالية بالسعر والتوفّر (تحسين تدريجي) */
+  /* إثراء بطاقات المشاريع بالإحصاءات والسعر (تحسين تدريجي من بيانات المشروع) */
   if (typeof projectById === 'function') {
-    document.querySelectorAll('.proj-grid:not(.proj-grid-done) .proj-card:not(.no-img)[href*="project.html?id="]').forEach((card) => {
+    document.querySelectorAll('.proj-card[href*="project.html?id="] .pc-foot').forEach((foot) => {
+      const card = foot.closest('.proj-card');
       const id = new URLSearchParams(card.getAttribute('href').split('?')[1] || '').get('id');
       const p = projectById(id);
-      const body = card.querySelector(':scope > div');
-      if (!p || !body || card.querySelector('.pcard-go')) return;
-      const st = unitStats(p);
-      const parts = [];
-      if (p.priceFrom > 0) parts.push('<span class="pcard-from">يبدأ من <bdi class="num">' + p.priceFrom.toLocaleString('en-US') + '</bdi> ر.س</span>');
-      if (st.available > 0) parts.push('<span class="pcard-avail"><bdi class="num">' + st.available + '</bdi> وحدة متاحة</span>');
-      const meta = parts.length ? '<div class="pcard-meta">' + parts.join('') + '</div>' : '';
-      body.insertAdjacentHTML('beforeend', meta + '<span class="pcard-go">عرض المشروع ' + ICONS.arrow + '</span>');
+      if (!p || foot.childElementCount) return;
+      const units = p.units.length;
+      const stats = '<div class="pc-stats">' +
+        '<div><b class="num">' + p.floors + '</b><span>أدوار</span></div>' +
+        (units ? '<div><b class="num">' + units + '</b><span>وحدات</span></div>' : '') +
+        (p.annexes ? '<div><b class="num">' + p.annexes + '</b><span>ملاحق</span></div>' : '') +
+        '</div>';
+      const price = p.priceFrom > 0
+        ? '<span class="pc-from">يبدأ من <bdi class="num">' + p.priceFrom.toLocaleString('en-US') + '</bdi> ر.س</span>'
+        : '<span class="pc-from">التفاصيل قريباً</span>';
+      foot.innerHTML = stats + '<div class="pc-end">' + price +
+        '<span class="pc-go">عرض المشروع ' + ICONS.arrow + '</span></div>';
     });
   }
 
