@@ -903,6 +903,7 @@ body:not(.home) .site-header {
   clip-path: polygon(7px 0, 100% 0, 100% 100%, 0 100%, 0 7px);
 }
 .card-avail .num { color: var(--teal-600); font-weight: 700; }
+.card-avail.muted { color: var(--text-mute); background: var(--bg-band); }
 
 /* ── Listings page ────────────────────────────────────── */
 .listings-head { padding-block: 9rem 3rem; }
