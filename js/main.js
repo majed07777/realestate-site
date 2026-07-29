@@ -35,10 +35,29 @@ function projMediaHTML(p) {
 }
 function projectCard(p) {
   const st = unitStats(p);
-  const priceHTML = p.priceFrom > 0
-    ? '<div class="pcard-price"><small>يبدأ من</small><bdi class="num">' + p.priceFrom.toLocaleString('en-US') + '</bdi> ر.س</div>'
-    : '<div class="pcard-price sold-out">مكتمل</div>';
+  let priceHTML;
+  if (p.priceFrom > 0) {
+    priceHTML = '<div class="pcard-price"><small>يبدأ من</small><bdi class="num">' + p.priceFrom.toLocaleString('en-US') + '</bdi> ر.س</div>';
+  } else if (p.status === 'مكتمل') {
+    priceHTML = '<div class="pcard-price sold-out">مشروع مكتمل</div>';
+  } else {
+    priceHTML = '<div class="pcard-price sold-out">التفاصيل قريباً</div>';
+  }
+  let availHTML;
+  if (st.available > 0) {
+    availHTML = '<span class="card-avail"><bdi class="num">' + st.available + '</bdi> ' +
+      (st.available === 1 ? 'وحدة متاحة' : 'وحدات متاحة') + '</span>';
+  } else if (p.status === 'مكتمل') {
+    availHTML = '<span class="card-avail muted">تم البيع بالكامل</span>';
+  } else {
+    availHTML = '<span class="card-avail muted">قريباً بإذن الله</span>';
+  }
   const apts = st.total > 0 ? st.total : '—';
+  const statCells = [
+    '<div><b class="num">' + p.floors + '</b><span>أدوار</span></div>',
+    (st.total > 0 ? '<div><b class="num">' + apts + '</b><span>وحدات</span></div>' : ''),
+    (p.annexes > 0 ? '<div><b class="num">' + p.annexes + '</b><span>ملاحق</span></div>' : ''),
+  ].join('');
   return (
     '<article class="pcard">' +
       '<a href="project.html?id=' + p.id + '" aria-label="مشروع ' + p.name + '">' +
@@ -50,13 +69,10 @@ function projectCard(p) {
         '<span class="pcard-code">المراد ' + p.code + '</span>' +
         '<h3><a href="project.html?id=' + p.id + '">' + p.name + '</a></h3>' +
         '<p class="pcard-place">' + ICONS.pin + 'حي ' + p.district + '، جدة</p>' +
-        '<div class="pcard-stats">' +
-          '<div><b class="num">' + p.floors + '</b><span>أدوار</span></div>' +
-          '<div><b class="num">' + apts + '</b><span>وحدات</span></div>' +
-          '<div><b class="num">' + p.annexes + '</b><span>ملاحق</span></div>' +
-        '</div>' +
+        availHTML +
+        '<div class="pcard-stats">' + statCells + '</div>' +
         '<div class="pcard-foot">' + priceHTML +
-          '<a class="arrow-cta" href="project.html?id=' + p.id + '">المشروع ' + ICONS.arrow + '</a>' +
+          '<a class="arrow-cta" href="project.html?id=' + p.id + '">عرض المشروع ' + ICONS.arrow + '</a>' +
         '</div>' +
       '</div>' +
     '</article>'
