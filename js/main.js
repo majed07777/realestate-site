@@ -20,35 +20,6 @@ function fmtPrice(n) {
   return '<bdi class="num">' + n.toLocaleString('en-US') + '</bdi><span class="cur">ر.س</span>';
 }
 
-/* بطاقة وحدة عقارية — تُستخدم في صفحة الوحدات والوحدات المشابهة */
-function propertyCard(p) {
-  const roomsCell = p.rooms > 0
-    ? ICONS.rooms + '<bdi class="num">' + p.rooms + '</bdi> غرف'
-    : ICONS.rooms + '<bdi>—</bdi>';
-  return (
-    '<article class="card">' +
-      '<a href="property.html?id=' + p.id + '" aria-label="تفاصيل ' + p.name + '">' +
-        '<div class="card-media">' +
-          '<img src="' + p.images[0] + '" alt="' + p.type + ' ' + p.name + ' في حي ' + p.district + '" loading="lazy">' +
-          '<span class="card-type">' + p.type + '</span>' +
-        '</div>' +
-      '</a>' +
-      '<div class="card-body">' +
-        '<h3><a href="property.html?id=' + p.id + '">' + p.name + '</a></h3>' +
-        '<p class="card-place">' + ICONS.pin + 'حي ' + p.district + '، جدة</p>' +
-        '<div class="card-specs">' +
-          '<span>' + ICONS.area + '<bdi class="num">' + p.area + '</bdi> م²</span>' +
-          '<span>' + roomsCell + '</span>' +
-        '</div>' +
-        '<div class="card-foot">' +
-          '<div class="card-price">' + fmtPrice(p.price) + '</div>' +
-          '<a class="arrow-cta" href="property.html?id=' + p.id + '">التفاصيل ' + ICONS.arrow + '</a>' +
-        '</div>' +
-      '</div>' +
-    '</article>'
-  );
-}
-
 /* ── مساعدات المشاريع والوحدات ─────────────────────────── */
 function projStatusClass(s) {
   return s === 'بدأ البيع' ? 'selling' : s === 'قيد الإنشاء' ? 'building' : 'done';
