@@ -106,6 +106,14 @@ const U106 = [];
 
 const PROJECTS = [
   {
+    id: 106, code: '106', name: 'المراد تراس فيو', district: 'السلامة', imgPos: 'center 46%',
+    status: 'بدأ البيع', completion: 100, floors: 4, annexes: 2, priceFrom: 1200000,
+    desc: 'المراد تراس فيو في حي السلامة بجدة؛ حيث تلتقي الراحة بالفخامة. شقق فاخرة بمساحة 230م² بأربع غرف (غرفتا نوم ماستر) وأربع دورات مياه وغرفة خادمة وتراس خاص، مع ملاحق علوية بسطح خاص، وشقتان في كل دور.',
+    features: ['شقق 230م² · 4 غرف', 'غرفتا نوم ماستر', 'تراس خاص لكل وحدة', 'مدخلان لكل وحدة', 'مكيفات دكت مخفية', 'غرفة خادمة', 'مصعد', 'دخول ذكي', 'غاز مركزي', 'كاميرات مراقبة'],
+    images: ['assets/projects/tras106-exterior.jpg?v=2', 'assets/projects/tras106-living1.jpg', 'assets/projects/tras106-living2.jpg', 'assets/projects/tras106-bedroom.jpg', 'assets/projects/tras106-living3.jpg', 'assets/projects/tras106-plan.jpg'],
+    units: U106,
+  },
+  {
     id: 107, code: '107', name: 'المراد تاون هاوس', district: 'الزهراء', imgPos: 'center 60%',
     status: 'بدأ البيع', completion: 100, floors: 2, annexes: 2, priceFrom: 1675000,
     desc: 'تاون هاوس فاخر مقسم على دورين مع سطح رحب في قلب حي الزهراء بجدة، قرب الواجهة البحرية وكل الخدمات، حيث تلتقي الفخامة بالراحة في تصميم عصري.',
@@ -120,14 +128,6 @@ const PROJECTS = [
     features: ['نماذج 100–106م²', 'ثلاث شقق لكل دور', 'ملحق دور كامل', 'مدخلان لكل وحدة', 'دخول ذكي', 'غاز مركزي', 'كاميرات مراقبة', 'موقف خاص'],
     images: ['assets/projects/homes108-exterior.jpg', 'assets/projects/homes108-majlis.jpg', 'assets/projects/homes108-living.jpg', 'assets/projects/homes108-dining.jpg', 'assets/projects/homes108-plan.jpg', 'assets/projects/homes108-investment.jpg'],
     units: U108,
-  },
-  {
-    id: 106, code: '106', name: 'المراد تراس فيو', district: 'السلامة', imgPos: 'center 46%',
-    status: 'بدأ البيع', completion: 100, floors: 4, annexes: 2, priceFrom: 1200000,
-    desc: 'المراد تراس فيو في حي السلامة بجدة؛ حيث تلتقي الراحة بالفخامة. شقق فاخرة بمساحة 230م² بأربع غرف (غرفتا نوم ماستر) وأربع دورات مياه وغرفة خادمة وتراس خاص، مع ملاحق علوية بسطح خاص، وشقتان في كل دور.',
-    features: ['شقق 230م² · 4 غرف', 'غرفتا نوم ماستر', 'تراس خاص لكل وحدة', 'مدخلان لكل وحدة', 'مكيفات دكت مخفية', 'غرفة خادمة', 'مصعد', 'دخول ذكي', 'غاز مركزي', 'كاميرات مراقبة'],
-    images: ['assets/projects/tras106-exterior.jpg?v=2', 'assets/projects/tras106-living1.jpg', 'assets/projects/tras106-living2.jpg', 'assets/projects/tras106-bedroom.jpg', 'assets/projects/tras106-living3.jpg', 'assets/projects/tras106-plan.jpg'],
-    units: U106,
   },
   {
     id: 109, code: '109', name: 'المراد أفينيو', district: 'الزهراء', imgPos: 'center 56%',
