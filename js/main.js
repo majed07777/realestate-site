@@ -33,49 +33,46 @@ function projMediaHTML(p) {
   }
   return '<span class="placeholder">' + p.code + '</span>';
 }
+/* بطاقة مشروع بنمط قسم المشاريع في الرئيسية:
+   صورة المبنى تملأ البطاقة والبيانات فوق تدرّج سفلي، أو لوحة داكنة برقم المشروع
+   للمشاريع بلا صور. */
 function projectCard(p) {
   const st = unitStats(p);
-  let priceHTML;
-  if (p.priceFrom > 0) {
-    priceHTML = '<div class="pcard-price"><small>يبدأ من</small><bdi class="num">' + p.priceFrom.toLocaleString('en-US') + '</bdi> ر.س</div>';
-  } else if (p.status === 'مكتمل') {
-    priceHTML = '<div class="pcard-price sold-out">مشروع مكتمل</div>';
+  const hasImg = p.images && p.images.length;
+
+  let statusLabel, statusCls;
+  if (p.status === 'مكتمل') {
+    statusLabel = 'مكتمل'; statusCls = 'past';
+  } else if (p.status === 'قيد الإنشاء') {
+    statusCls = 'current';
+    statusLabel = st.available > 0 ? 'قيد الإنشاء · ' + p.completion + '%' : 'قريباً · قيد الإنشاء';
   } else {
-    priceHTML = '<div class="pcard-price sold-out">التفاصيل قريباً</div>';
+    statusLabel = 'بدأ البيع'; statusCls = 'current';
   }
-  let availHTML;
-  if (st.available > 0) {
-    availHTML = '<span class="card-avail"><bdi class="num">' + st.available + '</bdi> ' +
-      (st.available === 1 ? 'وحدة متاحة' : 'وحدات متاحة') + '</span>';
-  } else if (p.status === 'مكتمل') {
-    availHTML = '<span class="card-avail muted">تم البيع بالكامل</span>';
-  } else {
-    availHTML = '<span class="card-avail muted">قريباً بإذن الله</span>';
-  }
-  const apts = st.total > 0 ? st.total : '—';
-  const statCells = [
-    '<div><b class="num">' + p.floors + '</b><span>أدوار</span></div>',
-    (st.total > 0 ? '<div><b class="num">' + apts + '</b><span>وحدات</span></div>' : ''),
-    (p.annexes > 0 ? '<div><b class="num">' + p.annexes + '</b><span>ملاحق</span></div>' : ''),
-  ].join('');
+
+  const parts = [];
+  if (p.priceFrom > 0) parts.push('<span class="pcard-from">يبدأ من <bdi class="num">' + p.priceFrom.toLocaleString('en-US') + '</bdi> ر.س</span>');
+  if (st.available > 0) parts.push('<span class="pcard-avail"><bdi class="num">' + st.available + '</bdi> وحدة متاحة</span>');
+  else if (p.status === 'مكتمل') parts.push('<span class="pcard-from mute">تم البيع بالكامل</span>');
+  const meta = parts.length ? '<div class="pcard-meta">' + parts.join('') + '</div>' : '';
+
+  const brandName = (p.name === 'المراد ' + p.code) ? 'المراد' : p.name;
+  const imgTag = hasImg
+    ? '<img src="' + p.images[0] + '" alt="' + p.name + ' في حي ' + p.district + '" loading="lazy"' +
+        (p.imgPos ? ' style="object-position:' + p.imgPos + '"' : '') + '>'
+    : '';
+
   return (
-    '<article class="pcard">' +
-      '<a href="project.html?id=' + p.id + '" aria-label="مشروع ' + p.name + '">' +
-        '<div class="pcard-media">' + projMediaHTML(p) +
-          '<span class="status-badge ' + projStatusClass(p.status) + '">' + p.status + '</span>' +
-        '</div>' +
-      '</a>' +
-      '<div class="pcard-body">' +
-        '<span class="pcard-code">المراد ' + p.code + '</span>' +
-        '<h3><a href="project.html?id=' + p.id + '">' + p.name + '</a></h3>' +
-        '<p class="pcard-place">' + ICONS.pin + 'حي ' + p.district + '، جدة</p>' +
-        availHTML +
-        '<div class="pcard-stats">' + statCells + '</div>' +
-        '<div class="pcard-foot">' + priceHTML +
-          '<a class="arrow-cta" href="project.html?id=' + p.id + '">عرض المشروع ' + ICONS.arrow + '</a>' +
-        '</div>' +
+    '<a class="proj-card' + (hasImg ? '' : ' no-img') + '" href="project.html?id=' + p.id + '" aria-label="مشروع ' + p.name + '">' +
+      imgTag +
+      '<span class="proj-status ' + statusCls + '">' + statusLabel + '</span>' +
+      '<div>' +
+        '<span class="pn2"><small>' + brandName + '</small>' + p.code + '</span>' +
+        '<span class="pd2">حي ' + p.district + '، جدة</span>' +
+        meta +
+        '<span class="pcard-go">عرض المشروع ' + ICONS.arrow + '</span>' +
       '</div>' +
-    '</article>'
+    '</a>'
   );
 }
 

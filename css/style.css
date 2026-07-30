@@ -646,6 +646,8 @@ body:not(.home) .site-header {
 /* current projects: fewer, larger cards so the renders read clearly */
 .proj-grid:not(.proj-grid-done) { grid-template-columns: repeat(2, 1fr); }
 .proj-grid:not(.proj-grid-done) .proj-card { min-height: clamp(300px, 30vw, 380px); }
+/* completed / no-render projects: compact tiles so they don't sit half-empty */
+.proj-grid:not(.proj-grid-done) .proj-card.no-img { min-height: clamp(215px, 21vw, 255px); }
 .proj-grid:not(.proj-grid-done) .pn2 { font-size: clamp(2.2rem, 3.4vw, 3rem); }
 /* a lone last card (e.g. 110) stretches full width as a banner */
 .proj-grid:not(.proj-grid-done) > a:last-child:nth-child(2n+1) {
@@ -737,6 +739,7 @@ body:not(.home) .site-header {
 .pcard-meta { display: flex; align-items: center; gap: .5rem .9rem; flex-wrap: wrap; margin-top: .7rem; }
 .pcard-from { font-family: var(--font-display); font-weight: 700; color: #fff; font-size: 1.02rem; }
 .pcard-from .num { color: var(--gold); }
+.pcard-from.mute { font-weight: 500; color: var(--on-dark-mute); font-family: var(--font-body); font-size: .92rem; }
 .pcard-avail {
   font-size: .78rem; font-weight: 500; color: #DFF3E4;
   background: rgba(62, 142, 99, .32);
@@ -769,7 +772,7 @@ body:not(.home) .site-header {
   color: var(--on-dark-mute);
   margin-bottom: .25rem;
 }
-.pd2 { color: var(--on-dark-soft); margin-top: .35rem; }
+.pd2 { display: block; color: var(--on-dark-soft); margin-top: .35rem; }
 
 /* ── Values: قيمنا ────────────────────────────────────── */
 .values-grid {
