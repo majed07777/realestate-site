@@ -117,8 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (loc && p.district) {
     const q = encodeURIComponent('حي ' + p.district + '، جدة');
     document.getElementById('loc-frame').src = 'https://maps.google.com/maps?q=' + q + '&z=14&output=embed';
-    document.getElementById('loc-directions').href = 'https://www.google.com/maps/search/?api=1&query=' + q;
-    document.getElementById('loc-sub').textContent = 'يقع ' + p.name + ' في حي ' + p.district + ' بجدة.';
+    // زر الاتجاهات: الموقع الدقيق إن توفّر رابطه، وإلا بحث على مستوى الحي
+    document.getElementById('loc-directions').href = p.mapLink || ('https://www.google.com/maps/search/?api=1&query=' + q);
+    document.getElementById('loc-sub').textContent = p.mapLink
+      ? 'يقع ' + p.name + ' في حي ' + p.district + ' بجدة — اضغط «الاتجاهات» للموقع الدقيق على الخريطة.'
+      : 'يقع ' + p.name + ' في حي ' + p.district + ' بجدة.';
     loc.hidden = false;
   }
 
