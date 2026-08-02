@@ -600,7 +600,9 @@ body:not(.home) .site-header {
   color: var(--teal-800);
   letter-spacing: .05em;
   line-height: 1.15;
-  min-width: 4.2ch;
+  min-width: 5.5ch;
+  text-align: end;
+  flex: none;
 }
 .stat span { color: var(--text-mute); font-size: 1rem; }
 
