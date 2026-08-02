@@ -107,6 +107,7 @@ const U106 = [];
 const PROJECTS = [
   {
     id: 106, code: '106', name: 'المراد تراس فيو', district: 'السلامة', imgPos: 'center 46%',
+    mapLink: 'https://maps.app.goo.gl/e2PWjfCdTpUhkLS48',
     status: 'بدأ البيع', completion: 100, floors: 4, annexes: 2, priceFrom: 1200000,
     desc: 'المراد تراس فيو في حي السلامة بجدة؛ حيث تلتقي الراحة بالفخامة. شقق فاخرة بمساحة 230م² بأربع غرف (غرفتا نوم ماستر) وأربع دورات مياه وغرفة خادمة وتراس خاص، مع ملاحق علوية بسطح خاص، وشقتان في كل دور.',
     features: ['شقق 230م² · 4 غرف', 'غرفتا نوم ماستر', 'تراس خاص لكل وحدة', 'مدخلان لكل وحدة', 'مكيفات دكت مخفية', 'غرفة خادمة', 'مصعد', 'دخول ذكي', 'غاز مركزي', 'كاميرات مراقبة'],
@@ -115,6 +116,7 @@ const PROJECTS = [
   },
   {
     id: 107, code: '107', name: 'المراد تاون هاوس', district: 'الزهراء', imgPos: 'center 60%',
+    mapLink: 'https://maps.app.goo.gl/LUBiZrc6fXTaETMy6',
     status: 'بدأ البيع', completion: 100, floors: 2, annexes: 2, priceFrom: 1675000,
     desc: 'تاون هاوس فاخر مقسم على دورين مع سطح رحب في قلب حي الزهراء بجدة، قرب الواجهة البحرية وكل الخدمات، حيث تلتقي الفخامة بالراحة في تصميم عصري.',
     features: ['ثماني وحدات على دورين', 'ملحقان علويان', 'سطح رحب خاص', 'غرفة عاملة منزلية بحمامها', 'مكيفات دكت مخفية', 'مستودع خاص', 'مصعد بالمشروع', 'دخول ذكي'],
@@ -133,6 +135,7 @@ const PROJECTS = [
   },
   {
     id: 109, code: '109', name: 'المراد أفينيو', district: 'الزهراء', imgPos: 'center 56%',
+    mapLink: 'https://maps.app.goo.gl/x6fA1bx1ysNBMBvDA',
     status: 'قيد الإنشاء', completion: 70, floors: 4, annexes: 2, priceFrom: 760000,
     desc: 'موطن يليق بك في حيٍّ ينبض بالحياة؛ تصاميم عصرية ومساحات مريحة لعائلتك في قلب حي الزهراء، حيث تعكس كل زاوية جمال التفاصيل. أربعة نماذج (119–128م²) وملحقان، بعوائد استثمارية مجزية. نسبة الإنجاز 70% والتسليم قريباً بإذن الله.',
     features: ['كاميرات مراقبة', 'مدخلان لكل شقة', 'مكنسة كهربائية مركزية', 'مصعدان', 'خزانات علوية وسفلية خاصة', 'موقف خاص', 'دخول ذكي', 'غاز مركزي'],
@@ -151,7 +154,7 @@ const PROJECTS = [
     ],
     units: U109,
   },
-  { id: 110, code: '110', name: 'المراد 110', district: 'الفيصلية', status: 'قيد الإنشاء', completion: 15, floors: 4, annexes: 0, priceFrom: 0, desc: 'مشروعنا الجديد في حي الفيصلية بجدة، تحت الإنشاء حالياً. تفاصيل الوحدات والأسعار قريباً بإذن الله.', features: [], images: [], units: [] },
+  { id: 110, code: '110', name: 'المراد 110', district: 'الفيصلية', mapLink: 'https://maps.app.goo.gl/qz7W5RYfrjJbHX5h7', status: 'قيد الإنشاء', completion: 15, floors: 4, annexes: 0, priceFrom: 0, desc: 'مشروعنا الجديد في حي الفيصلية بجدة، تحت الإنشاء حالياً. تفاصيل الوحدات والأسعار قريباً بإذن الله.', features: [], images: [], units: [] },
   { id: 105, code: '105', name: 'المراد 105', district: 'الفيصلية', status: 'مكتمل', completion: 100, floors: 4, annexes: 1, priceFrom: 0, desc: 'مشروع سكني مكتمل في حي الفيصلية بجدة، سُلّم بالكامل لأهله.', features: [], images: [], units: [] },
   { id: 104, code: '104', name: 'المراد 104', district: 'النزهة', status: 'مكتمل', completion: 100, floors: 4, annexes: 1, priceFrom: 0, desc: 'مشروع سكني مكتمل في حي النزهة بجدة.', features: [], images: [], units: [] },
   { id: 102, code: '102–103', name: 'المراد 102–103', district: 'الواحة', status: 'مكتمل', completion: 100, floors: 4, annexes: 2, priceFrom: 0, desc: 'مشروعان سكنيان مكتملان في حي الواحة بجدة.', features: [], images: [], units: [] },
