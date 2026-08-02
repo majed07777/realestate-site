@@ -112,6 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
   waBtn.target = '_blank';
   waBtn.rel = 'noopener';
 
+  /* خريطة الموقع (على مستوى الحي) */
+  const loc = document.getElementById('project-loc');
+  if (loc && p.district) {
+    const q = encodeURIComponent('حي ' + p.district + '، جدة');
+    document.getElementById('loc-frame').src = 'https://maps.google.com/maps?q=' + q + '&z=14&output=embed';
+    document.getElementById('loc-directions').href = 'https://www.google.com/maps/search/?api=1&query=' + q;
+    document.getElementById('loc-sub').textContent = 'يقع ' + p.name + ' في حي ' + p.district + ' بجدة.';
+    loc.hidden = false;
+  }
+
   /* كتلة الوحدات */
   const block = document.getElementById('units-block');
   if (!p.units.length) {
