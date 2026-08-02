@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=25">
+  <link rel="stylesheet" href="css/style.css?v=26">
 </head>
 <body>
   <a class="skip-link" href="#main">تجاوز إلى المحتوى</a>
@@ -99,6 +99,18 @@
 
       <!-- توفّر الوحدات + قائمة الوحدات -->
       <div id="units-block"></div>
+
+      <!-- خريطة الموقع -->
+      <section class="project-loc" id="project-loc" hidden>
+        <div class="section-open">
+          <h2>الموقع في <span class="gold">جدة</span></h2>
+          <p id="loc-sub"></p>
+        </div>
+        <div class="loc-map">
+          <iframe id="loc-frame" title="خريطة موقع المشروع في جدة" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <a class="btn" id="loc-directions" href="#" target="_blank" rel="noopener">الاتجاهات على خرائط قوقل</a>
+      </section>
     </div>
 
     <div class="wrap not-found" id="not-found" hidden>
@@ -184,6 +196,6 @@
 
   <script src="js/data.js?v=12"></script>
   <script src="js/main.js?v=12"></script>
-  <script src="js/project.js?v=7"></script>
+  <script src="js/project.js?v=9"></script>
 </body>
 </html>
