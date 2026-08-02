@@ -1341,48 +1341,26 @@ body:not(.home) .site-header {
 .wa-float:hover { background: var(--gold-deep); box-shadow: 0 10px 22px -8px rgba(130, 88, 28, .6); }
 .wa-float:active { background: var(--gold-deep); }
 
-/* ── خرائط المواقع ─────────────────────────────────────── */
-.map-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: clamp(1.2rem, 3vw, 2rem);
-  margin-top: 2.4rem;
-  align-items: stretch;
-}
-.map-embed {
-  position: relative;
-  overflow: hidden;
-  min-height: clamp(320px, 42vw, 460px);
-  border: 1px solid var(--card-border);
-  clip-path: polygon(16px 0, 100% 0, 100% 100%, 0 100%, 0 16px);
-  background: var(--bg-band);
-}
-.map-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(.25) contrast(1.02); }
-.map-list { display: flex; flex-direction: column; gap: .7rem; }
-.map-list li {
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+/* ── موقع المشروع ───────────────────────────────────────── */
+.project-loc { margin-top: clamp(2rem, 5vw, 3.2rem); }
+.loc-card {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: clamp(1rem, 3vw, 1.6rem); flex-wrap: wrap;
   background: var(--card); border: 1px solid var(--card-border);
-  clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
-  padding: .85rem 1.1rem;
-}
-.map-list .ml-proj { display: flex; flex-direction: column; text-decoration: none; min-width: 0; }
-.map-list .ml-proj b { color: var(--heading); font-family: var(--font-display); font-size: 1.05rem; }
-.map-list .ml-proj span { display: inline-flex; align-items: center; gap: .3rem; color: var(--text-mute); font-size: .85rem; margin-top: .1rem; }
-.map-list .ml-proj svg { width: 13px; height: 13px; color: var(--teal-600); flex: none; }
-.map-list .ml-dir { display: inline-flex; align-items: center; gap: .3rem; color: var(--gold-ink); font-weight: 700; font-size: .85rem; white-space: nowrap; text-decoration: none; }
-.map-list .ml-dir svg { width: 15px; height: 15px; transition: transform .3s ease; }
-.map-list .ml-dir:hover svg { transform: translate(-2px, -2px); }
-
-.project-loc { margin-top: clamp(2.2rem, 5vw, 3.6rem); }
-.loc-map {
-  position: relative; overflow: hidden;
-  height: clamp(280px, 40vw, 420px); margin: 1.3rem 0;
-  border: 1px solid var(--card-border);
   clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);
-  background: var(--bg-band);
+  padding: clamp(1.1rem, 3vw, 1.5rem) clamp(1.2rem, 3vw, 1.7rem);
 }
-.loc-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(.25) contrast(1.02); }
-@media (max-width: 820px) { .map-grid { grid-template-columns: 1fr; } }
+.loc-info { display: flex; align-items: center; gap: .95rem; min-width: 0; }
+.loc-info .loc-pin { width: 26px; height: 26px; color: var(--teal-600); flex: none; }
+.loc-label { display: block; color: var(--text-mute); font-size: .8rem; margin-bottom: .12rem; }
+.loc-info p { color: var(--heading); font-family: var(--font-display); font-size: 1.2rem; }
+.loc-card .btn { flex: none; }
+.loc-card .btn svg { width: 17px; height: 17px; transition: transform .3s ease; }
+.loc-card .btn:hover svg { transform: translate(-2px, -2px); }
+@media (max-width: 560px) {
+  .loc-card { align-items: stretch; }
+  .loc-card .btn { justify-content: center; }
+}
 
 /* ── Projects listing ─────────────────────────────────── */
 .projects-head { padding-block: 9rem 2.6rem; }

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=26">
+  <link rel="stylesheet" href="css/style.css?v=27">
 </head>
 <body>
   <a class="skip-link" href="#main">تجاوز إلى المحتوى</a>
@@ -100,16 +100,21 @@
       <!-- توفّر الوحدات + قائمة الوحدات -->
       <div id="units-block"></div>
 
-      <!-- خريطة الموقع -->
+      <!-- الموقع -->
       <section class="project-loc" id="project-loc" hidden>
-        <div class="section-open">
-          <h2>الموقع في <span class="gold">جدة</span></h2>
-          <p id="loc-sub"></p>
+        <div class="loc-card">
+          <div class="loc-info">
+            <svg class="loc-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21c-3.8-3.9-6-7-6-9.8A6 6 0 0 1 12 5a6 6 0 0 1 6 6.2c0 2.8-2.2 5.9-6 9.8Z"/><path d="M9.5 11.2 12 9l2.5 2.2"/></svg>
+            <div>
+              <span class="loc-label">موقع المشروع</span>
+              <p id="loc-sub"></p>
+            </div>
+          </div>
+          <a class="btn" id="loc-directions" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 17 7 7"/><path d="M7 14V7h7"/></svg>
+            عرض على خرائط قوقل
+          </a>
         </div>
-        <div class="loc-map">
-          <iframe id="loc-frame" title="خريطة موقع المشروع في جدة" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        <a class="btn" id="loc-directions" href="#" target="_blank" rel="noopener">الاتجاهات على خرائط قوقل</a>
       </section>
     </div>
 
@@ -196,6 +201,6 @@
 
   <script src="js/data.js?v=14"></script>
   <script src="js/main.js?v=12"></script>
-  <script src="js/project.js?v=10"></script>
+  <script src="js/project.js?v=11"></script>
 </body>
 </html>
