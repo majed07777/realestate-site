@@ -148,12 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const priceLine = (u.status === 'مباع' || !u.price) ? '' : ' — ' + u.price.toLocaleString('en-US') + ' ر.س';
     const title = u.type + ' ' + u.code + ' · ' + (u.floorText || u.floor) + ' · ' + u.status + priceLine;
     const style = pos ? ' style="' + pos + '"' : '';
+    const dup = (u.span > 1) ? ' is-duplex' : '';
+    const dupTag = (u.span > 1) ? '<em class="ab-dup">دوبلكس · دورين</em>' : '';
     if (u.status === 'مباع') {
-      return '<span class="ab-cell sold"' + style + ' title="' + title + '"><b>' + u.code + '</b><small>مباع</small></span>';
+      return '<span class="ab-cell sold' + dup + '"' + style + ' title="' + title + '"><b>' + u.code + '</b>' + dupTag + '<small>مباع</small></span>';
     }
     const wa = waLink('السلام عليكم، أرغب بالاستفسار عن الوحدة ' + u.code + ' في مشروع ' + p.name + ' (' + p.code + ').');
-    return '<a class="ab-cell ' + cls + '"' + style + ' href="' + wa + '" target="_blank" rel="noopener" title="' + title +
-      '"><b>' + u.code + '</b><small>' + u.status + '</small></a>';
+    return '<a class="ab-cell ' + cls + dup + '"' + style + ' href="' + wa + '" target="_blank" rel="noopener" title="' + title +
+      '"><b>' + u.code + '</b>' + dupTag + '<small>' + u.status + '</small></a>';
   }
   const byFloor = new Map();
   const seen = [];
@@ -168,13 +170,13 @@ document.addEventListener('DOMContentLoaded', () => {
   displayFloors.forEach((f, i) => { rowOf[f] = i + 1; });
   const cols = Math.min(Math.max(...[...byFloor.values()].map((a) => a.length)), 4);
   let html = '';
-  // عمود تسميات الأدوار (يمين)
-  displayFloors.forEach((f) => {
-    html += '<div class="ab-floor" style="grid-column:1;grid-row:' + rowOf[f] + '">' + f + '</div>';
-  });
-  // الوحدات: كل وحدة عند دورها الأعلى، والدوبلكس يمتد على دورين
+  // لكل نطاق تسمية واحدة تمتد على أدواره (تُدمج الدورين للدوبلكس)، ثم وحداته
   byFloor.forEach((us, f) => {
     const start = rowOf[f];
+    const sp = us[0].span || 1;
+    const label = us[0].floorText || f;
+    html += '<div class="ab-floor' + (sp > 1 ? ' ab-band' : '') +
+      '" style="grid-column:1;grid-row:' + start + ' / span ' + sp + '">' + label + '</div>';
     us.forEach((u, k) => {
       html += availCell(u, 'grid-row:' + start + ' / span ' + (u.span || 1) + ';grid-column:' + (2 + (k % cols)));
     });
