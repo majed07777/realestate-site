@@ -133,11 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const st2 = unitStats(p);
+  const nReserved = p.units.filter((u) => u.status === 'محجوز').length;
+  const nSold = p.units.filter((u) => u.status === 'مباع').length;
   const legend =
     '<div class="avail-legend">' +
       '<span><i class="sw-available"></i> متاح <bdi class="num">(' + st2.available + ')</bdi></span>' +
-      '<span><i class="sw-reserved"></i> محجوز</span>' +
-      '<span><i class="sw-sold"></i> مباع</span>' +
+      (nReserved ? '<span><i class="sw-reserved"></i> محجوز</span>' : '') +
+      (nSold ? '<span><i class="sw-sold"></i> مباع</span>' : '') +
     '</div>';
 
   // لوحة التوفّر: صف لكل دور، وخلية لكل وحدة، ملوّنة بحالتها
