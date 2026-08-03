@@ -141,15 +141,16 @@ document.addEventListener('DOMContentLoaded', () => {
     '</div>';
 
   // لوحة التوفّر: صف لكل دور، وخلية لكل وحدة، ملوّنة بحالتها
-  function availCell(u) {
+  function availCell(u, pos) {
     const cls = unitStatusClass(u.status);
     const priceLine = (u.status === 'مباع' || !u.price) ? '' : ' — ' + u.price.toLocaleString('en-US') + ' ر.س';
     const title = u.type + ' ' + u.code + ' · ' + u.floor + ' · ' + u.status + priceLine;
+    const style = pos ? ' style="' + pos + '"' : '';
     if (u.status === 'مباع') {
-      return '<span class="ab-cell sold" title="' + title + '"><b>' + u.code + '</b><small>مباع</small></span>';
+      return '<span class="ab-cell sold"' + style + ' title="' + title + '"><b>' + u.code + '</b><small>مباع</small></span>';
     }
     const wa = waLink('السلام عليكم، أرغب بالاستفسار عن الوحدة ' + u.code + ' في مشروع ' + p.name + ' (' + p.code + ').');
-    return '<a class="ab-cell ' + cls + '" href="' + wa + '" target="_blank" rel="noopener" title="' + title +
+    return '<a class="ab-cell ' + cls + '"' + style + ' href="' + wa + '" target="_blank" rel="noopener" title="' + title +
       '"><b>' + u.code + '</b><small>' + u.status + '</small></a>';
   }
   const floorOrder = [];
@@ -158,15 +159,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!byFloor.has(u.floor)) { byFloor.set(u.floor, []); floorOrder.push(u.floor); }
     byFloor.get(u.floor).push(u);
   });
-  const maxCols = Math.max(...floorOrder.map((f) => byFloor.get(f).length));
-  const boardRows = floorOrder.map((f) => {
+  // عدد الأعمدة موحّد بحدٍّ أقصى ٤: الأدوار ذات الوحدات الكثيرة تُلَفّ على أكثر من سطر
+  const maxPerFloor = Math.max(...floorOrder.map((f) => byFloor.get(f).length));
+  const cols = Math.min(maxPerFloor, 4);
+  let html = '';
+  let row = 1;
+  floorOrder.forEach((f) => {
     const us = byFloor.get(f);
-    let cells = us.map(availCell).join('');
-    for (let k = us.length; k < maxCols; k++) cells += '<span class="ab-cell empty" aria-hidden="true"></span>';
-    return '<div class="ab-floor">' + f + '</div>' + cells;
-  }).join('');
-  const board = '<div class="avail-scroll"><div class="avail-board" style="--cols:' + maxCols + '">' +
-    boardRows + '</div></div>';
+    const span = Math.ceil(us.length / cols);
+    html += '<div class="ab-floor" style="grid-column:1;grid-row:' + row + ' / span ' + span + '">' + f + '</div>';
+    us.forEach((u, k) => {
+      html += availCell(u, 'grid-row:' + (row + Math.floor(k / cols)) + ';grid-column:' + (2 + (k % cols)));
+    });
+    row += span;
+  });
+  const board = '<div class="avail-scroll"><div class="avail-board" style="--cols:' + cols + '">' +
+    html + '</div></div>';
   const availSection = '<section class="avail-section"><div class="avail-head"><h2>توفّر الوحدات</h2>' +
     '<span class="live-tag"><i></i>محدّث مباشرة</span></div>' + legend + board + '</section>';
 
