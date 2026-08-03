@@ -1436,8 +1436,8 @@ a.ab-cell:active { filter: brightness(.95); }
 .ab-cell.is-duplex { position: relative; }
 .ab-cell.is-duplex::after { content: ''; position: absolute; inset-inline: 12%; top: 50%;
   border-top: 1px dashed rgba(255, 255, 255, .3); }
-.ab-dup { font-family: var(--font-body); font-size: .56rem; font-weight: 600; opacity: .8;
-  letter-spacing: .01em; margin: .12rem 0; font-style: normal; }
+.ab-meta { font-family: var(--font-body); font-size: .58rem; font-weight: 600; opacity: .82;
+  letter-spacing: .01em; margin: .1rem 0; font-style: normal; line-height: 1.15; text-align: center; }
 
 .units-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin: 3rem 0 1.4rem; }
 .units-bar h2 { font-size: clamp(1.5rem, 3vw, 2rem); }

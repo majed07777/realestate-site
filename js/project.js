@@ -149,13 +149,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const title = u.type + ' ' + u.code + ' · ' + (u.floorText || u.floor) + ' · ' + u.status + priceLine;
     const style = pos ? ' style="' + pos + '"' : '';
     const dup = (u.span > 1) ? ' is-duplex' : '';
-    const dupTag = (u.span > 1) ? '<em class="ab-dup">دوبلكس · دورين</em>' : '';
+    // سطر الوصف: الواجهة (أمامية/خلفية/الاتجاه) مع الإشارة للدوبلكس
+    const face = (u.facing || '').replace('واجهتين ', '').replace('واجهة ', '');
+    const meta = (u.span > 1) ? ('دوبلكس' + (face ? ' · ' + face : '')) : face;
+    const metaTag = meta ? '<em class="ab-meta">' + meta + '</em>' : '';
     if (u.status === 'مباع') {
-      return '<span class="ab-cell sold' + dup + '"' + style + ' title="' + title + '"><b>' + u.code + '</b>' + dupTag + '<small>مباع</small></span>';
+      return '<span class="ab-cell sold' + dup + '"' + style + ' title="' + title + '"><b>' + u.code + '</b>' + metaTag + '<small>مباع</small></span>';
     }
     const wa = waLink('السلام عليكم، أرغب بالاستفسار عن الوحدة ' + u.code + ' في مشروع ' + p.name + ' (' + p.code + ').');
     return '<a class="ab-cell ' + cls + dup + '"' + style + ' href="' + wa + '" target="_blank" rel="noopener" title="' + title +
-      '"><b>' + u.code + '</b>' + dupTag + '<small>' + u.status + '</small></a>';
+      '"><b>' + u.code + '</b>' + metaTag + '<small>' + u.status + '</small></a>';
   }
   const byFloor = new Map();
   const seen = [];
