@@ -63,8 +63,8 @@ const U107 = [
   { code: 'TH6', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
   { code: 'TH7', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'محجوز' },
   { code: 'TH8', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
-  { code: 'M1', model: 'M', type: 'ملحق علوي', facing: 'أمامية', floor: 'علوي', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'متاح' },
-  { code: 'M2', model: 'M', type: 'ملحق علوي', facing: 'خلفية', floor: 'علوي', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'متاح' },
+  { code: 'M1', model: 'M', type: 'ملحق الروف', facing: 'أمامية', floor: 'الروف', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'متاح' },
+  { code: 'M2', model: 'M', type: 'ملحق الروف', facing: 'خلفية', floor: 'الروف', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'متاح' },
 ];
 // 107 — جميع الوحدات متاحة (حسب لوحة تحديثات البيع)
 U107.forEach((u) => { u.status = 'متاح'; });
@@ -75,7 +75,7 @@ const U108 = makeUnits([
   { code: 'B', facing: 'أمامية', area: 105, rooms: 2, baths: 3, price: 560000 },
   { code: 'C', facing: 'خلفية', area: 100, rooms: 2, baths: 3, price: 550000 },
 ], ['الأول', 'الثاني', 'الثالث', 'الرابع'], 0);
-U108.push({ code: 'M1', model: 'M', type: 'ملحق دور كامل', facing: 'أمامية', floor: 'علوي', area: 320, rooms: 4, baths: 4, price: 1450000, status: 'متاح' });
+U108.push({ code: 'M1', model: 'M', type: 'ملحق دور كامل', facing: 'أمامية', floor: 'الروف', area: 320, rooms: 4, baths: 4, price: 1450000, status: 'متاح' });
 // حالات التوفّر من جدول الحجوزات الرسمي (108)
 const _s108 = { A1: 'مباع', A2: 'مباع', A3: 'مباع', A4: 'مباع', B1: 'متاح', B2: 'مباع', B3: 'متاح', B4: 'متاح', C1: 'متاح', C2: 'متاح', C3: 'متاح', C4: 'متاح', M1: 'محجوز' };
 U108.forEach((u) => { if (_s108[u.code]) u.status = _s108[u.code]; });
@@ -87,8 +87,8 @@ const U109 = makeUnits([
   { code: 'C', facing: 'واجهة جنوبية', area: 128, rooms: 3, baths: 3, price: 790000 },
   { code: 'D', facing: 'داخلية', area: 128, rooms: 3, baths: 3, price: 760000 },
 ], ['الأول', 'الثاني', 'الثالث', 'الرابع'], 0);
-U109.push({ code: 'M1', model: 'M', type: 'ملحق علوي', facing: 'واجهتين شرقية وجنوبية', floor: 'علوي', area: 246, rooms: 4, baths: 4, price: 1750000, status: 'متاح' });
-U109.push({ code: 'M2', model: 'M', type: 'ملحق علوي', facing: 'واجهة شرقية', floor: 'علوي', area: 246, rooms: 4, baths: 4, price: 1720000, status: 'محجوز' });
+U109.push({ code: 'M1', model: 'M', type: 'ملحق الروف', facing: 'واجهتين شرقية وجنوبية', floor: 'الروف', area: 246, rooms: 4, baths: 4, price: 1750000, status: 'متاح' });
+U109.push({ code: 'M2', model: 'M', type: 'ملحق الروف', facing: 'واجهة شرقية', floor: 'الروف', area: 246, rooms: 4, baths: 4, price: 1720000, status: 'محجوز' });
 // حالات التوفّر من جدول الحجوزات الرسمي (109)
 const _s109 = { A1: 'متاح', A2: 'متاح', A3: 'متاح', A4: 'متاح', B1: 'محجوز', B2: 'محجوز', B3: 'محجوز', B4: 'محجوز', C1: 'محجوز', C2: 'مباع', C3: 'مباع', C4: 'مباع', D1: 'محجوز', D2: 'مباع', D3: 'مباع', D4: 'مباع', M1: 'محجوز', M2: 'محجوز' };
 U109.forEach((u) => { if (_s109[u.code]) u.status = _s109[u.code]; });
@@ -101,13 +101,13 @@ const U106 = [];
   U106.push({ code: n, model: 'ش', type: 'شقة', facing: '', floor: _fl106[i], area: 230, rooms: 4, baths: 4, price: 1200000, status: _st106[i] });
 });
 ['09', '10'].forEach((n, i) => {
-  U106.push({ code: n, model: 'م', type: 'ملحق علوي', facing: '', floor: 'علوي', area: 231, rooms: 4, baths: 4, price: 1450000, status: _st106[8 + i] });
+  U106.push({ code: n, model: 'م', type: 'ملحق الروف', facing: '', floor: 'الروف', area: 231, rooms: 4, baths: 4, price: 1450000, status: _st106[8 + i] });
 });
 
 const PROJECTS = [
   {
     id: 106, code: '106', name: 'المراد تراس فيو', district: 'السلامة', imgPos: 'center 46%',
-    mapLink: 'https://maps.app.goo.gl/e2PWjfCdTpUhkLS48',
+    mapLink: 'https://maps.app.goo.gl/LUBiZrc6fXTaETMy6',
     status: 'بدأ البيع', completion: 100, floors: 4, annexes: 2, priceFrom: 1200000,
     desc: 'المراد تراس فيو في حي السلامة بجدة؛ حيث تلتقي الراحة بالفخامة. شقق فاخرة بمساحة 230م² بأربع غرف (غرفتا نوم ماستر) وأربع دورات مياه وغرفة خادمة وتراس خاص، مع ملاحق علوية بسطح خاص، وشقتان في كل دور.',
     features: ['شقق 230م² · 4 غرف', 'غرفتا نوم ماستر', 'تراس خاص لكل وحدة', 'مدخلان لكل وحدة', 'مكيفات دكت مخفية', 'غرفة خادمة', 'مصعد', 'دخول ذكي', 'غاز مركزي', 'كاميرات مراقبة'],
@@ -116,7 +116,7 @@ const PROJECTS = [
   },
   {
     id: 107, code: '107', name: 'المراد تاون هاوس', district: 'الزهراء', imgPos: 'center 60%',
-    mapLink: 'https://maps.app.goo.gl/LUBiZrc6fXTaETMy6',
+    mapLink: 'https://maps.app.goo.gl/e2PWjfCdTpUhkLS48',
     status: 'بدأ البيع', completion: 100, floors: 2, annexes: 2, priceFrom: 1675000,
     desc: 'تاون هاوس فاخر مقسم على دورين مع سطح رحب في قلب حي الزهراء بجدة، قرب الواجهة البحرية وكل الخدمات، حيث تلتقي الفخامة بالراحة في تصميم عصري.',
     features: ['ثماني وحدات على دورين', 'ملحقان علويان', 'سطح رحب خاص', 'غرفة عاملة منزلية بحمامها', 'مكيفات دكت مخفية', 'مستودع خاص', 'مصعد بالمشروع', 'دخول ذكي'],
