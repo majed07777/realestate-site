@@ -53,16 +53,17 @@ function makeUnits(models, floors, priceStep) {
 
 /* ── وحدات كل مشروع (بأعداد فعلية) ─────────────────────── */
 
-// 107 — تاون هاوس: ٨ وحدات على دورين + ملحقان علويان = ١٠ وحدات
+// 107 — تاون هاوس: مبنى بأربعة أدوار + الروف. كل تاون هاوس دوبلكس يمتد على دورين
+//   الأدنى (TH1–TH4) على الأول+الثاني، والأعلى (TH5–TH8) على الثالث+الرابع، وملحقان على الروف
 const U107 = [
-  { code: 'TH1', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'مباع' },
-  { code: 'TH2', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'محجوز' },
-  { code: 'TH3', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'متاح' },
-  { code: 'TH4', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'دورين', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'متاح' },
-  { code: 'TH5', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'مباع' },
-  { code: 'TH6', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
-  { code: 'TH7', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'محجوز' },
-  { code: 'TH8', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'دورين', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
+  { code: 'TH1', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'الثاني', span: 2, floorText: 'الأول + الثاني', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'متاح' },
+  { code: 'TH2', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'الثاني', span: 2, floorText: 'الأول + الثاني', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'متاح' },
+  { code: 'TH3', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'الثاني', span: 2, floorText: 'الأول + الثاني', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'متاح' },
+  { code: 'TH4', model: 'A', type: 'تاون هاوس', facing: 'أمامية', floor: 'الثاني', span: 2, floorText: 'الأول + الثاني', area: 269, rooms: 6, baths: 5, price: 1730000, status: 'متاح' },
+  { code: 'TH5', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'الرابع', span: 2, floorText: 'الثالث + الرابع', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
+  { code: 'TH6', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'الرابع', span: 2, floorText: 'الثالث + الرابع', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
+  { code: 'TH7', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'الرابع', span: 2, floorText: 'الثالث + الرابع', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
+  { code: 'TH8', model: 'B', type: 'تاون هاوس', facing: 'خلفية', floor: 'الرابع', span: 2, floorText: 'الثالث + الرابع', area: 260, rooms: 5, baths: 5, price: 1700000, status: 'متاح' },
   { code: 'M1', model: 'M', type: 'ملحق الروف', facing: 'أمامية', floor: 'الروف', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'متاح' },
   { code: 'M2', model: 'M', type: 'ملحق الروف', facing: 'خلفية', floor: 'الروف', area: 269, rooms: 6, baths: 5, price: 1675000, status: 'متاح' },
 ];
@@ -90,7 +91,7 @@ const U109 = makeUnits([
 U109.push({ code: 'M1', model: 'M', type: 'ملحق الروف', facing: 'واجهتين شرقية وجنوبية', floor: 'الروف', area: 246, rooms: 4, baths: 4, price: 1750000, status: 'متاح' });
 U109.push({ code: 'M2', model: 'M', type: 'ملحق الروف', facing: 'واجهة شرقية', floor: 'الروف', area: 246, rooms: 4, baths: 4, price: 1720000, status: 'محجوز' });
 // حالات التوفّر من جدول الحجوزات الرسمي (109)
-const _s109 = { A1: 'متاح', A2: 'متاح', A3: 'متاح', A4: 'متاح', B1: 'محجوز', B2: 'محجوز', B3: 'محجوز', B4: 'محجوز', C1: 'محجوز', C2: 'مباع', C3: 'مباع', C4: 'مباع', D1: 'محجوز', D2: 'مباع', D3: 'مباع', D4: 'مباع', M1: 'محجوز', M2: 'محجوز' };
+const _s109 = { A1: 'متاح', A2: 'متاح', A3: 'متاح', A4: 'متاح', B1: 'محجوز', B2: 'محجوز', B3: 'محجوز', B4: 'متاح', C1: 'محجوز', C2: 'مباع', C3: 'مباع', C4: 'متاح', D1: 'محجوز', D2: 'مباع', D3: 'مباع', D4: 'متاح', M1: 'متاح', M2: 'متاح' };
 U109.forEach((u) => { if (_s109[u.code]) u.status = _s109[u.code]; });
 
 // 106 — تراس فيو: ٨ شقق (230م²) + ملحقان (231م²) = ١٠ وحدات (الحالات من جدول الحجوزات الرسمي)
@@ -117,6 +118,8 @@ const PROJECTS = [
   {
     id: 107, code: '107', name: 'المراد تاون هاوس', district: 'الزهراء', imgPos: 'center 60%',
     mapLink: 'https://maps.app.goo.gl/e2PWjfCdTpUhkLS48',
+    // أدوار المبنى لجدول التوفّر (من الأسفل للأعلى)؛ التاون هاوس دوبلكس يمتد على دورين
+    floorPlan: ['الأول', 'الثاني', 'الثالث', 'الرابع', 'الروف'],
     status: 'بدأ البيع', completion: 100, floors: 2, annexes: 2, priceFrom: 1675000,
     desc: 'تاون هاوس فاخر مقسم على دورين مع سطح رحب في قلب حي الزهراء بجدة، قرب الواجهة البحرية وكل الخدمات، حيث تلتقي الفخامة بالراحة في تصميم عصري.',
     features: ['ثماني وحدات على دورين', 'ملحقان علويان', 'سطح رحب خاص', 'غرفة عاملة منزلية بحمامها', 'مكيفات دكت مخفية', 'مستودع خاص', 'مصعد بالمشروع', 'دخول ذكي'],
