@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function availCell(u, pos) {
     const cls = unitStatusClass(u.status);
     const priceLine = (u.status === 'مباع' || !u.price) ? '' : ' — ' + u.price.toLocaleString('en-US') + ' ر.س';
-    const title = u.type + ' ' + u.code + ' · ' + u.floor + ' · ' + u.status + priceLine;
+    const title = u.type + ' ' + u.code + ' · ' + (u.floorText || u.floor) + ' · ' + u.status + priceLine;
     const style = pos ? ' style="' + pos + '"' : '';
     if (u.status === 'مباع') {
       return '<span class="ab-cell sold"' + style + ' title="' + title + '"><b>' + u.code + '</b><small>مباع</small></span>';
@@ -153,25 +153,29 @@ document.addEventListener('DOMContentLoaded', () => {
     return '<a class="ab-cell ' + cls + '"' + style + ' href="' + wa + '" target="_blank" rel="noopener" title="' + title +
       '"><b>' + u.code + '</b><small>' + u.status + '</small></a>';
   }
-  const floorOrder = [];
   const byFloor = new Map();
+  const seen = [];
   p.units.forEach((u) => {
-    if (!byFloor.has(u.floor)) { byFloor.set(u.floor, []); floorOrder.push(u.floor); }
+    if (!byFloor.has(u.floor)) { byFloor.set(u.floor, []); seen.push(u.floor); }
     byFloor.get(u.floor).push(u);
   });
-  // عدد الأعمدة موحّد بحدٍّ أقصى ٤: الأدوار ذات الوحدات الكثيرة تُلَفّ على أكثر من سطر
-  const maxPerFloor = Math.max(...floorOrder.map((f) => byFloor.get(f).length));
-  const cols = Math.min(maxPerFloor, 4);
+  // ترتيب الأدوار في اللوحة: الروف بالأعلى ثم نزولاً حتى الأول
+  const floorList = p.floorPlan || seen;                 // من الأسفل للأعلى
+  const displayFloors = floorList.slice().reverse();     // الروف بالأعلى
+  const rowOf = {};
+  displayFloors.forEach((f, i) => { rowOf[f] = i + 1; });
+  const cols = Math.min(Math.max(...[...byFloor.values()].map((a) => a.length)), 4);
   let html = '';
-  let row = 1;
-  floorOrder.forEach((f) => {
-    const us = byFloor.get(f);
-    const span = Math.ceil(us.length / cols);
-    html += '<div class="ab-floor" style="grid-column:1;grid-row:' + row + ' / span ' + span + '">' + f + '</div>';
+  // عمود تسميات الأدوار (يمين)
+  displayFloors.forEach((f) => {
+    html += '<div class="ab-floor" style="grid-column:1;grid-row:' + rowOf[f] + '">' + f + '</div>';
+  });
+  // الوحدات: كل وحدة عند دورها الأعلى، والدوبلكس يمتد على دورين
+  byFloor.forEach((us, f) => {
+    const start = rowOf[f];
     us.forEach((u, k) => {
-      html += availCell(u, 'grid-row:' + (row + Math.floor(k / cols)) + ';grid-column:' + (2 + (k % cols)));
+      html += availCell(u, 'grid-row:' + start + ' / span ' + (u.span || 1) + ';grid-column:' + (2 + (k % cols)));
     });
-    row += span;
   });
   const board = '<div class="avail-scroll"><div class="avail-board" style="--cols:' + cols + '">' +
     html + '</div></div>';
@@ -216,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
         priceHTML +
         '<ul class="unit-meta">' +
           '<li><span>النوع</span><b>' + u.type + '</b></li>' +
-          '<li><span>الدور</span><b>' + u.floor + '</b></li>' +
+          '<li><span>الدور</span><b>' + (u.floorText || u.floor) + '</b></li>' +
           (u.facing ? '<li><span>الجهة</span><b>' + u.facing + '</b></li>' : '') +
           '<li><span>المساحة</span><b><bdi class="num">' + u.area + '</bdi> م²</b></li>' +
           '<li><span>الغرف</span><b><bdi class="num">' + u.rooms + '</bdi></b></li>' +
