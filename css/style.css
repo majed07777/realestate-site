@@ -651,11 +651,6 @@ body:not(.home) .site-header {
 /* completed / no-render projects: compact tiles so they don't sit half-empty */
 .proj-grid:not(.proj-grid-done) .proj-card.no-img { min-height: clamp(215px, 21vw, 255px); }
 .proj-grid:not(.proj-grid-done) .pn2 { font-size: clamp(2.2rem, 3.4vw, 3rem); }
-/* a lone last card (e.g. 110) stretches full width as a banner */
-.proj-grid:not(.proj-grid-done) > a:last-child:nth-child(2n+1) {
-  grid-column: 1 / -1;
-  min-height: clamp(200px, 18vw, 240px);
-}
 /* completed projects: quieter, more compact tiles */
 .proj-grid-done { grid-template-columns: repeat(4, 1fr); }
 .proj-grid-done .proj-card { min-height: 168px; }
